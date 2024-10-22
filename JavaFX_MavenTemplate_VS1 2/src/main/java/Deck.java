@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.io.*; 
+import java.util.*; 
 public class Deck extends ArrayList<Card>{
 	public ArrayList<Card> cardList;
 	public Deck() {
@@ -19,6 +21,7 @@ public class Deck extends ArrayList<Card>{
 				cardList.add(new Card(letter, j));
 			}
 		}
+		Collections.shuffle(cardList); 
 	}
 	
 	
@@ -26,5 +29,9 @@ public class Deck extends ArrayList<Card>{
 		cardList.clear();
 		this.createDeck();
 		
+	}
+	
+	public Card takeCardFromDeck() {
+		return cardList.remove(0);
 	}
 }
