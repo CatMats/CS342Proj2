@@ -42,7 +42,7 @@ public class ThreeCardLogic {
 		case 5:return bet;
 		}
 	}
-
+	// Compares the Dealer's hand to the player's hand
 	public static int compareHands(ArrayList<Card> dealer, ArrayList<Card> player) {
 		int dInt = evalHand(dealer);
 		int pInt = evalHand(player);

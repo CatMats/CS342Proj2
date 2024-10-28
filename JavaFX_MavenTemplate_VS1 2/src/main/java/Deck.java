@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.io.*; 
 import java.util.*; 
+@SuppressWarnings("serial")
 public class Deck extends ArrayList<Card>{
 	public ArrayList<Card> cardList;
 	public Deck() {
@@ -24,14 +25,24 @@ public class Deck extends ArrayList<Card>{
 		Collections.shuffle(cardList); 
 	}
 	
-	
+	// Clears the deck and gets a new deck
 	public void newDeck() {
 		cardList.clear();
 		this.createDeck();
 		
 	}
-	
+	// Gives the top card of the deck
 	public Card takeCardFromDeck() {
 		return cardList.remove(0);
+	}
+	// prints out the contents of a deck
+	public void printOutDeck() {
+		for (Card c: cardList) {
+			System.out.println(c.getSuit() + ":" + c.getValue());
+		}
+	}
+	// Returns the size of the deck
+	public int getDeckSize() {
+		return this.cardList.size();
 	}
 }
