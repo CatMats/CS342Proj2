@@ -20,6 +20,9 @@ class MyTest {
 	@Test
 	void deck_test() {
 		myDeck.printOutDeck();
+		assertEquals(myDeck.get(0).getValue() == myDeck.takeCardFromDeck().getValue(), "Values of the head and removed card aren't equal");
+		assertEquals(myDeck.get(0).getValue() == myDeck.takeCardFromDeck().getValue(), "Values of the head and removed card aren't equal");
+		assertEquals(myDeck.get(0).getValue() == myDeck.takeCardFromDeck().getValue(), "Values of the head and removed card aren't equal");
 	}
 
 }

@@ -17,7 +17,7 @@ public class Deck extends ArrayList<Card>{
 				case 2: letter = 'S'; break;
 				case 3: letter = 'H'; break;
 				}
-				System.out.println(letter);
+				//System.out.println(letter);
 				add(new Card(letter, j));
 			}
 		}

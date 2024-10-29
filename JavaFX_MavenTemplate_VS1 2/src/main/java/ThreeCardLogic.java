@@ -41,6 +41,8 @@ public class ThreeCardLogic {
 		case 4:return bet * 3;
 		case 5:return bet;
 		}
+		// 
+		return 0;
 	}
 	// Compares the Dealer's hand to the player's hand
 	public static int compareHands(ArrayList<Card> dealer, ArrayList<Card> player) {
@@ -49,6 +51,8 @@ public class ThreeCardLogic {
 		if (dInt == pInt) {return 0;}
 		if (dInt > pInt) {return 1;}
 		if (dInt < pInt) {return 2;}
+		
+		return 0;
 	}
 	
 	// Sorts the hand from smallest to biggest
@@ -64,6 +68,7 @@ public class ThreeCardLogic {
 			}
 			sortedHand.add(min);
 		
+		}
 		return sortedHand;
 	}
 }
