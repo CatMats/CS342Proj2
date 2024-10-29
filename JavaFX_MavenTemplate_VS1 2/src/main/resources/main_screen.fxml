@@ -6,10 +6,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="hbox" fx:controller = "JavaFXTemplate"
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="vbox" fx:controller = "Main_menu_controller"
       fx:id = "root">
-
+    <Label  fx:id = "titleLabel" text="Three Card poker" />
     <Button fx:id = "startGame" text = "Start" onAction = "#startGame"/>
-    <Button fx:id = "quitGame" text = "Quit"  onAction = "#quitGame"/>
+    <Button fx:id = "quitGame" text = "Quit"  onAction =  "#quitGame"/>
 
 </VBox>

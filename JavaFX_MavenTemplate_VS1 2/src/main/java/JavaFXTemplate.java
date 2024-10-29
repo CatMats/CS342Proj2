@@ -4,6 +4,8 @@ import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -17,9 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 
-
 public class JavaFXTemplate extends Application {
 
+	private static Stage primaryStage;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -29,6 +31,7 @@ public class JavaFXTemplate extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
+		this.primaryStage = primaryStage;
 		primaryStage.setTitle("Welcome to JavaFX");
 		
 		 Rectangle rect = new Rectangle (100, 40, 100, 100);
@@ -59,9 +62,8 @@ public class JavaFXTemplate extends Application {
 	     Scene scene = new Scene(root, 700,700);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		
-				
-		
 	}
+
+	public static Stage getPrimaryStage() {return primaryStage;}
 
 }
