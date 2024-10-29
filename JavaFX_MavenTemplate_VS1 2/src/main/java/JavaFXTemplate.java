@@ -12,6 +12,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+// added imports
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+
+
 
 public class JavaFXTemplate extends Application {
 

@@ -41,7 +41,7 @@ public class ThreeCardLogic {
 		case 4:return bet * 3;
 		case 5:return bet;
 		}
-		// 
+		// shouldn't get here
 		return 0;
 	}
 	// Compares the Dealer's hand to the player's hand
@@ -51,7 +51,7 @@ public class ThreeCardLogic {
 		if (dInt == pInt) {return 0;}
 		if (dInt > pInt) {return 1;}
 		if (dInt < pInt) {return 2;}
-		
+		// shouldn't get here...
 		return 0;
 	}
 	
