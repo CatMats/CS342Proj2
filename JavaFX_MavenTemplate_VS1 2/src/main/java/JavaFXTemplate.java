@@ -6,6 +6,8 @@ import javafx.application.Application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -31,9 +33,9 @@ public class JavaFXTemplate extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		this.primaryStage = primaryStage;
+		JavaFXTemplate.primaryStage = primaryStage;
 		primaryStage.setTitle("Welcome to JavaFX");
-		
+		/*
 		 Rectangle rect = new Rectangle (100, 40, 100, 100);
 	     rect.setArcHeight(50);
 	     rect.setArcWidth(50);
@@ -58,10 +60,14 @@ public class JavaFXTemplate extends Application {
 	     ft.play();
 	     BorderPane root = new BorderPane();
 	     root.setCenter(rect);
-	     
-	     Scene scene = new Scene(root, 700,700);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+	     */
+		Parent root = FXMLLoader.load(getClass().getResource("main_screen.fxml"));
+		primaryStage.setTitle("Three Card Poker");
+			//s1.getStylesheets().add("/styles/style1.css");
+
+		Scene scene = new Scene(root, 1920,1080);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	public static Stage getPrimaryStage() {return primaryStage;}

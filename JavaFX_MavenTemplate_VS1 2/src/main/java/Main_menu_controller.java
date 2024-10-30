@@ -13,7 +13,7 @@ public class Main_menu_controller {
     }
     @FXML
     public void quitGame(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/quit_popup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quit_popup.fxml"));
         Parent root = loader.load();
         Main_menu_controller myctr = loader.getController();
         Stage substage = new Stage();
