@@ -13,9 +13,11 @@ public class QuitPopup {
     @FXML
     Button noButton;
 
-    public void quitProgram(ActionEvent event) {
+    @FXML
+    public void quitProgram() {
         JavaFXTemplate.getPrimaryStage().close();
     }
+    @FXML
     public void quitPopupWindow(ActionEvent event) {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }

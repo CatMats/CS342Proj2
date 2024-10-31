@@ -2,11 +2,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Main_menu_controller {
+    @FXML
+    BorderPane bP;
+
+    @FXML
+    VBox Vbox;
+
+    @FXML
+    Label label;
+
+    @FXML
+    Button startButton;
+
+    @FXML
+    Button endButton;
+
+
+
     @FXML
     public void startGame(ActionEvent event) throws IOException {
 
