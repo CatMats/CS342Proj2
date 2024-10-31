@@ -27,20 +27,16 @@ public class JavaFXTemplate extends Application {
 
 	private static Stage primaryStage;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		launch(args);
 	}
 
-	//feel free to remove the starter code from this method
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		JavaFXTemplate.primaryStage = primaryStage;
-		//primaryStage.setTitle("Welcome to JavaFX");
-		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/main_screen.fxml")));
-		primaryStage.setTitle("Three Card Poker");
-			//s1.getStylesheets().add("/styles/style1.css");
 
+		JavaFXTemplate.primaryStage = primaryStage;
+		primaryStage.setTitle("Three Card Poker");
+		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/main_screen.fxml")));
 		Scene scene = new Scene(root, 700,700);
 		scene.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/test.css")).toExternalForm()));
 		primaryStage.setScene(scene);

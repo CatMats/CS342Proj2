@@ -12,19 +12,12 @@ import java.io.IOException;
 
 public class Main_menu_controller {
     @FXML
-    BorderPane bP;
-
+    Button startGame;
     @FXML
-    VBox Vbox;
-
+    Button quitGame;
     @FXML
-    Label label;
+    Label titleLabel;
 
-    @FXML
-    Button startButton;
-
-    @FXML
-    Button endButton;
 
 
 
