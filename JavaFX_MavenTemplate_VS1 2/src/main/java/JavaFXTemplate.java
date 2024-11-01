@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.util.Objects;
 
 
@@ -45,4 +46,21 @@ public class JavaFXTemplate extends Application {
 
 	public static Stage getPrimaryStage() {return primaryStage;}
 
+	public static void setScene(int i) throws IOException {
+		switch (i) {
+			case 0:
+				Parent root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/main_screen.fxml")));
+				Scene scene = new Scene(root, 700,700);
+				scene.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+				primaryStage.setScene(scene);
+				break;
+			case 1:
+				root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
+				scene = new Scene(root, 700,700);
+				scene.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+				primaryStage.setScene(scene);
+				break;
+		}
+
+	}
 }

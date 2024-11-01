@@ -26,7 +26,7 @@ public class Main_menu_controller {
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
-
+        JavaFXTemplate.setScene(1);
     }
     @FXML
     public void quitGame(ActionEvent event) throws IOException{
