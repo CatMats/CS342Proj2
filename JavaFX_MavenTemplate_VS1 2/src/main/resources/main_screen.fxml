@@ -6,12 +6,23 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" styleClass = "test" fx:controller = "Main_menu_controller" fx:id = "root">
-    <VBox styleClass="vbox">
-        <Label  fx:id = "titleLabel" text="Three Card poker" />
-        <Button fx:id = "startGame" text = "Start" onAction = "#startGame"/>
-        <Button fx:id = "quitGame" text = "Quit"  onAction =  "#quitGame"/>
+    <top>
+        <AnchorPane>
+            <HBox alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="50">
+                <Label  fx:id = "titleLabel" text="Three Card Poker"  />
+            </HBox>
+        </AnchorPane>
+    </top>
+    <center>
+        <VBox spacing = "5" alignment="CENTER">
 
-    </VBox>
+            <Button fx:id = "startGame" text = "Start" onAction = "#startGame"/>
+            <Button fx:id = "quitGame" text = "Quit"  onAction =  "#quitGame"/>
+        </VBox>
+    </center>
+
 
 </BorderPane>
