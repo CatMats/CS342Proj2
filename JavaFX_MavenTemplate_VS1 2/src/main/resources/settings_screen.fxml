@@ -9,12 +9,14 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="Settings_screen_controller"
-            prefHeight="700.0" prefWidth="700.0">
-    <VBox>
-        <Button fx:id = "backButton" onAction="#backButtonAction"/>
-        <Button fx:id = "backgroundButton" onAction="#backgroundButtonAction"/>
-        <Button fx:id = "resetButton" onAction="#resetButtonAction"/>
-        <Button fx:id = "titleButton" onAction="#titleButtonAction"/>
+            prefHeight="700.0" prefWidth="700.0" >
+
+    <VBox alignment="CENTER" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0"
+          AnchorPane.topAnchor="150.0" AnchorPane.bottomAnchor="150.0" spacing="20">
+        <Button fx:id = "backButton" text = "Back" prefWidth="380" prefHeight = "125" onAction="#backButtonAction"/>
+        <Button fx:id = "backgroundButton" text = "Change Background" prefWidth="380" prefHeight = "125"  onAction="#backgroundButtonAction"/>
+        <Button fx:id = "resetButton" text = "Fresh Start" prefWidth="380" prefHeight = "125" onAction="#resetButtonAction"/>
+        <Button fx:id = "titleButton" text = "Exit to Title" prefWidth="380" prefHeight = "125" onAction="#titleButtonAction"/>
 
     </VBox>
 

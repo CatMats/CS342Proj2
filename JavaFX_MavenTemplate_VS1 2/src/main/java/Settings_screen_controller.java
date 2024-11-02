@@ -2,6 +2,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
+
 public class Settings_screen_controller {
     @FXML
     Button backButton;
@@ -21,6 +23,7 @@ public class Settings_screen_controller {
     public void resetButtonAction(ActionEvent event) {
     }
 
-    public void titleButtonAction(ActionEvent event) {
+    public void titleButtonAction(ActionEvent event) throws IOException {
+        JavaFXTemplate.setScene(0);
     }
 }
