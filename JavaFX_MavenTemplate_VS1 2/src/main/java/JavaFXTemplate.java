@@ -43,9 +43,11 @@ public class JavaFXTemplate extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
+	// Reference for primaryStage for other classes
 	public static Stage getPrimaryStage() {return primaryStage;}
 
+	// Changes the scene into another scene
+	// probably coded better idk
 	public static void setScene(int i) throws IOException {
 		switch (i) {
 			case 0:
@@ -56,6 +58,12 @@ public class JavaFXTemplate extends Application {
 				break;
 			case 1:
 				root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
+				scene = new Scene(root, 700,700);
+				scene.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+				primaryStage.setScene(scene);
+				break;
+			case 2:
+				root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/settings_screen.fxml")));
 				scene = new Scene(root, 700,700);
 				scene.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
 				primaryStage.setScene(scene);
