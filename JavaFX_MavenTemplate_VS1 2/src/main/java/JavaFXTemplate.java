@@ -74,4 +74,11 @@ public class JavaFXTemplate extends Application {
 		}
 
 	}
+
+	public static void resetGameScreen() throws IOException {
+		Parent root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
+		game_screen = new Scene(root, 700,700);
+		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+	}
+
 }

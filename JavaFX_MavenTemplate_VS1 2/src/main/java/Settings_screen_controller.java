@@ -14,13 +14,15 @@ public class Settings_screen_controller {
     @FXML
     Button titleButton;
 
-    public void backButtonAction(ActionEvent event) {
+    public void backButtonAction(ActionEvent event) throws IOException {
+        JavaFXTemplate.setScene(2);
     }
 
     public void backgroundButtonAction(ActionEvent event) {
     }
 
-    public void resetButtonAction(ActionEvent event) {
+    public void resetButtonAction(ActionEvent event) throws IOException {
+        JavaFXTemplate.resetGameScreen();
     }
 
     public void titleButtonAction(ActionEvent event) throws IOException {
