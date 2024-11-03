@@ -15,10 +15,11 @@ public class Settings_screen_controller {
     Button titleButton;
 
     public void backButtonAction(ActionEvent event) throws IOException {
-        JavaFXTemplate.setScene(2);
+        JavaFXTemplate.setScene(1);
     }
 
     public void backgroundButtonAction(ActionEvent event) {
+        //TODO: Make a change css styles for the GameScreen Variable
     }
 
     public void resetButtonAction(ActionEvent event) throws IOException {
