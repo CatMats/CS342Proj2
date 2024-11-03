@@ -8,10 +8,13 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class Game_screen_controller {
+
+    @FXML
+    HBox playerHBox;
     @FXML
     VBox player1VBOX;
     @FXML
-    HBox player1HBox;
+    VBox player2VBOX;
     @FXML
     Button settingButtons;
 
@@ -19,21 +22,56 @@ public class Game_screen_controller {
     int player1Money;
     int player2Money;
 
-
+    // The function for the settings
     @FXML
     public void settingsButton() throws IOException {
         JavaFXTemplate.setScene(2);
     }
 
-
+    @FXML
     public void player1AnteClick(ActionEvent event) {
-        TextField textfield = new TextField();
-        textfield.setPromptText("Ante");
+        TextField player1AnteTextField = new TextField();
+        player1AnteTextField.setPromptText("Ante Bet");
+        player1SwapButtonWithTextFields(event, player1AnteTextField);
+
+    }
+    @FXML
+    public void player1PairPlus(ActionEvent event) {
+        TextField player1PairPlusTextField = new TextField();
+        player1PairPlusTextField.setPromptText("Pair Plus Bet");
+        player1SwapButtonWithTextFields(event, player1PairPlusTextField);
+    }
+    // Swaps the button in the player 1's choices with a textfield when clicked
+    public void player1SwapButtonWithTextFields(ActionEvent event, TextField textfield) {
         Button tempButton = (Button)event.getSource();
         int indexOfButton = player1VBOX.getChildren().indexOf(tempButton);
         player1VBOX.getChildren().remove(tempButton);
         player1VBOX.getChildren().add(indexOfButton, textfield);
+    }
+
+    @FXML
+    public void player2AnteClick(ActionEvent event) {
+        TextField player2AnteTextField = new TextField();
+        player2AnteTextField.setPromptText("Ante Bet");
+        player2SwapButtonWithTextFields(event, player2AnteTextField);
 
     }
+    @FXML
+    public void player2PairPlus(ActionEvent event) {
+        TextField player2PairPlusTextField = new TextField();
+        player2PairPlusTextField.setPromptText("Pair Plus Bet");
+        player2SwapButtonWithTextFields(event, player2PairPlusTextField);
+    }
+    // Swaps the button in the player 2's choices with a textfield when clicked
+    public void player2SwapButtonWithTextFields(ActionEvent event, TextField textfield) {
+        Button tempButton = (Button)event.getSource();
+        int indexOfButton = player2VBOX.getChildren().indexOf(tempButton);
+        player2VBOX.getChildren().remove(tempButton);
+        player2VBOX.getChildren().add(indexOfButton, textfield);
+    }
+
+
+
+
 }
 

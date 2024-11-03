@@ -11,17 +11,17 @@
             fx:controller="Game_screen_controller"
             prefHeight="700.0" prefWidth="700.0">
     <Button fx:id = "settingButtons" text = "Settings" onAction="#settingsButton"/>
-    <HBox fx:id="player1HBox">
+    <HBox fx:id="playerHBox">
         <VBox fx:id = "player1VBOX" spacing="10">
             <Label fx:id = "player1Label" text = "Player 1"/>
             <Button fx:id = "player1Ante" text = "Ante" onAction="#player1AnteClick"/>
-            <Button fx:id = "player1PairPlus" text = "Pair Plus"/>
+            <Button fx:id = "player1PairPlus" text = "Pair Plus" onAction = "#player1PairPlus"/>
             <Button fx:id = "player1Confirm" text = "Confirm"/>
         </VBox>
-        <VBox spacing="10">
+        <VBox fx:id = "player2VBOX" spacing="10">
             <Label fx:id = "player2Label" text = "Player 2"/>
-            <Button fx:id = "player2Ante" text = "Ante"/>
-            <Button fx:id = "player2PairPlus" text = "Pair Plus"/>
+            <Button fx:id = "player2Ante" text = "Ante" onAction="#player2AnteClick"/>
+            <Button fx:id = "player2PairPlus" text = "Pair Plus" onAction="#player2AnteClick"/>
             <Button fx:id = "player2Confirm" text = "Confirm"/>
         </VBox>
     </HBox>
