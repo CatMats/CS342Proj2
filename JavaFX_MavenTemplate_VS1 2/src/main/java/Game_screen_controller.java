@@ -18,7 +18,10 @@ public class Game_screen_controller {
     @FXML
     Button settingButtons;
 
-
+    TextField player1AnteTextField;
+    TextField player1PairPlusTextField;
+    TextField player2AnteTextField;
+    TextField player2PairPlusTextField;
     int player1Money;
     int player2Money;
 
@@ -30,14 +33,14 @@ public class Game_screen_controller {
 
     @FXML
     public void player1AnteClick(ActionEvent event) {
-        TextField player1AnteTextField = new TextField();
+        player1AnteTextField = new TextField();
         player1AnteTextField.setPromptText("Ante Bet");
         player1SwapButtonWithTextFields(event, player1AnteTextField);
 
     }
     @FXML
     public void player1PairPlus(ActionEvent event) {
-        TextField player1PairPlusTextField = new TextField();
+        player1PairPlusTextField = new TextField();
         player1PairPlusTextField.setPromptText("Pair Plus Bet");
         player1SwapButtonWithTextFields(event, player1PairPlusTextField);
     }
@@ -51,14 +54,14 @@ public class Game_screen_controller {
 
     @FXML
     public void player2AnteClick(ActionEvent event) {
-        TextField player2AnteTextField = new TextField();
+        player2AnteTextField = new TextField();
         player2AnteTextField.setPromptText("Ante Bet");
         player2SwapButtonWithTextFields(event, player2AnteTextField);
 
     }
     @FXML
     public void player2PairPlus(ActionEvent event) {
-        TextField player2PairPlusTextField = new TextField();
+        player2PairPlusTextField = new TextField();
         player2PairPlusTextField.setPromptText("Pair Plus Bet");
         player2SwapButtonWithTextFields(event, player2PairPlusTextField);
     }
