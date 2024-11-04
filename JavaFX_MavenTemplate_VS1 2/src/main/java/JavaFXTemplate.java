@@ -20,12 +20,16 @@ import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.util.Objects;
 
 
 public class JavaFXTemplate extends Application {
 
 	private static Stage primaryStage;
+	private static Scene main_menu_screen;
+	private static Scene game_screen;
+	private static Scene setting_screen;
 	public static void main(String[] args) {
 
 		launch(args);
@@ -33,16 +37,48 @@ public class JavaFXTemplate extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		// Create Scenes
+		Parent root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/main_screen.fxml")));
+		main_menu_screen = new Scene(root, 700,700);
+		main_menu_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+
+		root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
+		game_screen = new Scene(root, 700,700);
+		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+
+		root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/settings_screen.fxml")));
+		setting_screen = new Scene(root, 700,700);
+		setting_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
 
 		JavaFXTemplate.primaryStage = primaryStage;
 		primaryStage.setTitle("Three Card Poker");
-		Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/main_screen.fxml")));
-		Scene scene = new Scene(root, 700,700);
-		scene.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/test.css")).toExternalForm()));
-		primaryStage.setScene(scene);
+		primaryStage.setScene(main_menu_screen);
 		primaryStage.show();
 	}
-
+	// Reference for primaryStage for other classes
 	public static Stage getPrimaryStage() {return primaryStage;}
+
+	// Changes the scene into another scene
+	// probably coded better idk (okay i coded it better :) )
+	public static void setScene(int i) throws IOException {
+		switch (i) {
+			case 0:
+				primaryStage.setScene(main_menu_screen);
+				break;
+			case 1:
+				primaryStage.setScene(game_screen);
+				break;
+			case 2:
+				primaryStage.setScene(setting_screen);
+				break;
+		}
+
+	}
+
+	public static void resetGameScreen() throws IOException {
+		Parent root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
+		game_screen = new Scene(root, 700,700);
+		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+	}
 
 }
