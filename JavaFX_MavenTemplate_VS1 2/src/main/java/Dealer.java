@@ -6,7 +6,8 @@ public class Dealer {
 	public Dealer() {
 		theDeck = new Deck();
 	}
-	
+
+
 	public ArrayList<Card> dealHand() {
 		if(theDeck.size() <= 34) {theDeck.newDeck();}
 		ArrayList<Card> dealtCards = new ArrayList<>();
