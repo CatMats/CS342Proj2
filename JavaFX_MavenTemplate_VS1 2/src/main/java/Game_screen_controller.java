@@ -1,6 +1,7 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,6 +20,11 @@ public class Game_screen_controller {
     Button player1Confirm;
     @FXML
     Button player2Confirm;
+    @FXML
+    Label player1WarningLabel;
+    @FXML
+    Label player2WarningLabel;
+
     @FXML
     Button settingButtons;
 
@@ -88,28 +94,45 @@ public class Game_screen_controller {
     public void player1ReadyButton(ActionEvent event) {
         String anteBet = player1AnteTextField.getText();
         String pairBet;
+
         // checks if pairBet exists
         try {pairBet = player1PairPlusTextField.getText();}
         catch(Exception ignored) {pairBet = "FAILED";}
 
-
         if (anteBet == null || anteBet.isEmpty()) {return;}
+
         // Checks if Ante Bet isn't invalid
         for (char c : anteBet.toCharArray()) {
-            if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+            if (!Character.isDigit(c)) {
+                setPlayerWarningText("Ante Bet was invalid! Please put only digits for a bet!",1);
+                return;
+            }
         }
+
         // Checks if Ante bet > minimum
-        if(Integer.parseInt(anteBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+        if(Integer.parseInt(anteBet) < 5) {
+            setPlayerWarningText("Ante Bet is too low! Minimum bet is $5!",1);
+            return;
+        }
+
         player1AnteBet = Integer.parseInt(anteBet);
+
         // If PairPlusBet is valid, then we go here and check stuff
         if (!Objects.equals(pairBet, "FAILED")) {
             for (char c : pairBet.toCharArray()) {
-                if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+                if (!Character.isDigit(c)) {
+                    setPlayerWarningText("Pair Plus Bet was invalid! Please put only digits for a bet!",1);
+                    return;}
             }
-            if(Integer.parseInt(pairBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+            if(Integer.parseInt(pairBet) < 5 && Integer.parseInt(pairBet) > 0) {
+                setPlayerWarningText("Pair Plus Bet is too low! Minimum bet is $5!",1);
+                return;
+            }
             player1pairBet = Integer.parseInt(pairBet);
         }
+
         player1Confirm.setDisable(true);
+        setPlayerWarningText("",1);
         if (player2Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
 
     }
@@ -124,25 +147,48 @@ public class Game_screen_controller {
         if (anteBet == null || anteBet.isEmpty()) {return;}
         // Checks if Ante Bet isn't invalid
         for (char c : anteBet.toCharArray()) {
-            if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+            if (!Character.isDigit(c)) {
+                setPlayerWarningText("Ante Bet was invalid! Please put only digits for a bet!",2);
+                return;
+            }
         }
         // Checks if Ante bet > minimum
-        if(Integer.parseInt(anteBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+        if(Integer.parseInt(anteBet) < 5) {
+            setPlayerWarningText("Ante Bet is too low! Minimum bet is $5!",2);
+            return;
+        }
         player2AnteBet = Integer.parseInt(anteBet);
         // If PairPlusBet is valid, then we go here and check stuff
         if (!Objects.equals(pairBet, "FAILED")) {
             for (char c : pairBet.toCharArray()) {
-                if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+                if (!Character.isDigit(c)) {
+                    setPlayerWarningText("Pair Plus bet was invalid! Please put only digits for a bet!",2);
+                    return;
+                }
             }
-            if(Integer.parseInt(pairBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+            if(Integer.parseInt(pairBet) < 5 && Integer.parseInt(pairBet) > 0) {
+                setPlayerWarningText("Pair Plus Bet is too low! Minimum bet is $5!",2);
+                return;
+            }
             player2pairBet = Integer.parseInt(pairBet);
         }
         player2Confirm.setDisable(true);
         //this.printBets();
+        setPlayerWarningText("",2);
         if (player1Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
 
 
     }
+
+    // Sets the warning text for a player.  Called from hitting the confirm button and alerts the player that something has gone wrong
+    public void setPlayerWarningText(String warning, int player) {
+        if (player == 1) {
+            player1WarningLabel.setText(warning);
+        } else {
+            player2WarningLabel.setText(warning);
+        }
+    }
+
 
     // Prints out bet stats for testing
     public static void printBets() {
