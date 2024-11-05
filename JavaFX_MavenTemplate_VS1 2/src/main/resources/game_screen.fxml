@@ -22,7 +22,7 @@
         <Label fx:id = "player2Label" text = "Player 2"/>
         <Button fx:id = "player2Ante" text = "Ante" onAction="#player2AnteClick"/>
         <Button fx:id = "player2PairPlus" text = "Pair Plus" onAction="#player2PairPlus"/>
-        <Button fx:id = "player2Confirm" text = "Confirm" onAction = "#player2ReadyButton" disable="true"/>
+        <Button fx:id = "player2Confirm" text = "Confirm" onAction = "#player2ReadyButton" disable="true" />
     </VBox>
 
 
