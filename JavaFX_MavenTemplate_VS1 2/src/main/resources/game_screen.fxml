@@ -10,21 +10,21 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="Game_screen_controller"
             prefHeight="700.0" prefWidth="700.0">
-    <Button fx:id = "settingButtons" text = "Settings" onAction="#settingsButton"/>
-    <HBox fx:id="playerHBox">
-        <VBox fx:id = "player1VBOX" spacing="10">
-            <Label fx:id = "player1Label" text = "Player 1"/>
-            <Button fx:id = "player1Ante" text = "Ante" onAction="#player1AnteClick"/>
-            <Button fx:id = "player1PairPlus" text = "Pair Plus" onAction = "#player1PairPlus"/>
-            <Button fx:id = "player1Confirm" text = "Confirm"/>
-        </VBox>
-        <VBox fx:id = "player2VBOX" spacing="10">
-            <Label fx:id = "player2Label" text = "Player 2"/>
-            <Button fx:id = "player2Ante" text = "Ante" onAction="#player2AnteClick"/>
-            <Button fx:id = "player2PairPlus" text = "Pair Plus" onAction="#player2AnteClick"/>
-            <Button fx:id = "player2Confirm" text = "Confirm"/>
-        </VBox>
-    </HBox>
+    <Button fx:id = "settingButtons" text = "Settings" onAction="#settingsButton" prefWidth="100" prefHeight="50"/>
+
+    <VBox fx:id = "player1VBOX" spacing="10" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="350">
+        <Label fx:id = "player1Label" text = "Player 1"/>
+        <Button fx:id = "player1Ante" text = "Ante" onAction="#player1AnteClick"/>
+        <Button fx:id = "player1PairPlus" text = "Pair Plus" onAction = "#player1PairPlus"/>
+        <Button fx:id = "player1Confirm" text = "Confirm" onAction = "#player1ReadyButton" disable="true"/>
+    </VBox>
+    <VBox fx:id = "player2VBOX" spacing="10" AnchorPane.rightAnchor="150" AnchorPane.topAnchor="350">
+        <Label fx:id = "player2Label" text = "Player 2"/>
+        <Button fx:id = "player2Ante" text = "Ante" onAction="#player2AnteClick"/>
+        <Button fx:id = "player2PairPlus" text = "Pair Plus" onAction="#player2PairPlus"/>
+        <Button fx:id = "player2Confirm" text = "Confirm" onAction = "#player2ReadyButton" disable="true"/>
+    </VBox>
+
 
     <Label fx:id = "player1MoneyLabel" text = "xxxx"/>
 

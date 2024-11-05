@@ -9,12 +9,15 @@ import java.io.IOException;
 
 public class Game_screen_controller {
 
-    @FXML
-    HBox playerHBox;
+
     @FXML
     VBox player1VBOX;
     @FXML
     VBox player2VBOX;
+    @FXML
+    Button player1Confirm;
+    @FXML
+    Button player2Confirm;
     @FXML
     Button settingButtons;
 
@@ -22,6 +25,12 @@ public class Game_screen_controller {
     TextField player1PairPlusTextField;
     TextField player2AnteTextField;
     TextField player2PairPlusTextField;
+    int player1AnteBet;
+    int player2AnteBet;
+    int player1pairBet = 0;
+    int player2pairBet = 0;
+
+
     int player1Money;
     int player2Money;
 
@@ -36,6 +45,7 @@ public class Game_screen_controller {
         player1AnteTextField = new TextField();
         player1AnteTextField.setPromptText("Ante Bet");
         player1SwapButtonWithTextFields(event, player1AnteTextField);
+        player1Confirm.setDisable(false);
 
     }
     @FXML
@@ -57,6 +67,7 @@ public class Game_screen_controller {
         player2AnteTextField = new TextField();
         player2AnteTextField.setPromptText("Ante Bet");
         player2SwapButtonWithTextFields(event, player2AnteTextField);
+        player2Confirm.setDisable(false);
 
     }
     @FXML
@@ -71,6 +82,31 @@ public class Game_screen_controller {
         int indexOfButton = player2VBOX.getChildren().indexOf(tempButton);
         player2VBOX.getChildren().remove(tempButton);
         player2VBOX.getChildren().add(indexOfButton, textfield);
+    }
+
+    public void player1ReadyButton(ActionEvent event) {
+        String anteBet = player1AnteTextField.getText();
+        if (anteBet == null || anteBet.isEmpty()) {return;}
+        for (char c : anteBet.toCharArray()) {
+            if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+        }
+        if(Integer.parseInt(anteBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+
+        player1Confirm.setDisable(true);
+        if (player2Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
+
+    }
+    public void player2ReadyButton(ActionEvent event) {
+        String anteBet = player2AnteTextField.getText();
+        if (anteBet == null || anteBet.isEmpty()) {return;}
+        for (char c : anteBet.toCharArray()) {
+            if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+        }
+        if(Integer.parseInt(anteBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+
+        player2Confirm.setDisable(true);
+        if (player1Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
+
     }
 
 
