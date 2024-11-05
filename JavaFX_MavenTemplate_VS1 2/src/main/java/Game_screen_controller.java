@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Game_screen_controller {
 
@@ -25,10 +26,10 @@ public class Game_screen_controller {
     TextField player1PairPlusTextField;
     TextField player2AnteTextField;
     TextField player2PairPlusTextField;
-    int player1AnteBet;
-    int player2AnteBet;
-    int player1pairBet = 0;
-    int player2pairBet = 0;
+    static int player1AnteBet;
+    static int player2AnteBet;
+    static int player1pairBet = 0;
+    static int player2pairBet = 0;
 
 
     int player1Money;
@@ -86,29 +87,68 @@ public class Game_screen_controller {
 
     public void player1ReadyButton(ActionEvent event) {
         String anteBet = player1AnteTextField.getText();
+        String pairBet;
+        // checks if pairBet exists
+        try {pairBet = player1PairPlusTextField.getText();}
+        catch(Exception ignored) {pairBet = "FAILED";}
+
+
         if (anteBet == null || anteBet.isEmpty()) {return;}
+        // Checks if Ante Bet isn't invalid
         for (char c : anteBet.toCharArray()) {
             if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
         }
+        // Checks if Ante bet > minimum
         if(Integer.parseInt(anteBet) < 5) {return;} // TODO: probably some feed that the bet is too low
-
+        player1AnteBet = Integer.parseInt(anteBet);
+        // If PairPlusBet is valid, then we go here and check stuff
+        if (!Objects.equals(pairBet, "FAILED")) {
+            for (char c : pairBet.toCharArray()) {
+                if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+            }
+            if(Integer.parseInt(pairBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+            player1pairBet = Integer.parseInt(pairBet);
+        }
         player1Confirm.setDisable(true);
         if (player2Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
 
     }
     public void player2ReadyButton(ActionEvent event) {
         String anteBet = player2AnteTextField.getText();
+        String pairBet;
+        // checks if pairBet exists
+        try {pairBet = player2PairPlusTextField.getText();}
+        catch(Exception ignored) {pairBet = "FAILED";}
+
+
         if (anteBet == null || anteBet.isEmpty()) {return;}
+        // Checks if Ante Bet isn't invalid
         for (char c : anteBet.toCharArray()) {
             if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
         }
+        // Checks if Ante bet > minimum
         if(Integer.parseInt(anteBet) < 5) {return;} // TODO: probably some feed that the bet is too low
-
+        player2AnteBet = Integer.parseInt(anteBet);
+        // If PairPlusBet is valid, then we go here and check stuff
+        if (!Objects.equals(pairBet, "FAILED")) {
+            for (char c : pairBet.toCharArray()) {
+                if (!Character.isDigit(c)) {return;} // TODO: Lets put a pop-up here below the ready button saying the min bet isn't valid
+            }
+            if(Integer.parseInt(pairBet) < 5) {return;} // TODO: probably some feed that the bet is too low
+            player2pairBet = Integer.parseInt(pairBet);
+        }
         player2Confirm.setDisable(true);
+        //this.printBets();
         if (player1Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
+
 
     }
 
+    // Prints out bet stats for testing
+    public static void printBets() {
+        System.out.println("Player 1:" + player1AnteBet + "," + player1pairBet);
+        System.out.println("Player 2:" + player2AnteBet + "," + player2pairBet);
+    }
 
 
 
