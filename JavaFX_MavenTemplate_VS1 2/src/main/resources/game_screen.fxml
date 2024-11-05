@@ -5,28 +5,32 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="Game_screen_controller"
             prefHeight="700.0" prefWidth="700.0">
     <Button fx:id = "settingButtons" text = "Settings" onAction="#settingsButton" prefWidth="100" prefHeight="50"/>
 
-    <VBox fx:id = "player1VBOX" spacing="10" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="350">
-        <Label fx:id = "player1Label" text = "Player 1"/>
-        <Button fx:id = "player1Ante" text = "Ante" onAction="#player1AnteClick"/>
-        <Button fx:id = "player1PairPlus" text = "Pair Plus" onAction = "#player1PairPlus"/>
-        <Button fx:id = "player1Confirm" text = "Confirm" onAction = "#player1ReadyButton" disable="true"/>
-        <Label  fx:id = "player1WarningLabel"/>
+    <Label  fx:id = "player1WarningLabel" AnchorPane.leftAnchor="160"  AnchorPane.bottomAnchor="100" alignment= "CENTER"/>
+    <Label  fx:id = "player2WarningLabel" AnchorPane.rightAnchor="110"  AnchorPane.bottomAnchor="100" alignment= "CENTER"/>
+
+    <VBox fx:id = "player1VBOX" prefWidth="110" spacing="10" AnchorPane.leftAnchor="160" AnchorPane.bottomAnchor="140">
+        <Label fx:id = "player1Label" prefWidth="110"  text = "Player 1" alignment= "CENTER"/>
+        <Button fx:id = "player1Ante" prefWidth="110" prefHeight="50" text = "Ante" onAction="#player1AnteClick"/>
+        <Button fx:id = "player1PairPlus" prefWidth="110" prefHeight="50" text = "Pair Plus" onAction = "#player1PairPlus"/>
+        <Button fx:id = "player1Confirm" prefWidth="110" prefHeight="30" text = "Confirm" onAction = "#player1ReadyButton" disable="true"/>
     </VBox>
-    <VBox fx:id = "player2VBOX" spacing="10" AnchorPane.rightAnchor="150" AnchorPane.topAnchor="350">
-        <Label fx:id = "player2Label" text = "Player 2"/>
-        <Button fx:id = "player2Ante" text = "Ante" onAction="#player2AnteClick"/>
-        <Button fx:id = "player2PairPlus" text = "Pair Plus" onAction="#player2PairPlus"/>
-        <Button fx:id = "player2Confirm" text = "Confirm" onAction = "#player2ReadyButton" disable="true" />
-        <Label  fx:id = "player2WarningLabel"/>
+    <VBox fx:id = "player2VBOX" prefWidth="110" spacing="10" AnchorPane.rightAnchor="160" AnchorPane.bottomAnchor="140">
+        <Label fx:id = "player2Label" prefWidth="110" text = "Player 2" alignment= "CENTER"/>
+        <Button fx:id = "player2Ante" prefWidth="110" prefHeight="50" text = "Ante" onAction="#player2AnteClick"/>
+        <Button fx:id = "player2PairPlus" prefWidth="110" prefHeight="50" text = "Pair Plus" onAction="#player2PairPlus"/>
+        <Button fx:id = "player2Confirm" prefWidth="110" prefHeight="30" text = "Confirm" onAction = "#player2ReadyButton" disable="true" />
+
     </VBox>
 
+    <Im
 
     <Label fx:id = "player1MoneyLabel" text = "xxxx"/>
 
