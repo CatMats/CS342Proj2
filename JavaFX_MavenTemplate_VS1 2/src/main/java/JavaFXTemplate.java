@@ -39,15 +39,15 @@ public class JavaFXTemplate extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// Create Scenes
 		Parent root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/main_screen.fxml")));
-		main_menu_screen = new Scene(root, 700,700);
+		main_menu_screen = new Scene(root, 800,800);
 		main_menu_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
 
 		root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
-		game_screen = new Scene(root, 700,700);
+		game_screen = new Scene(root, 800,800);
 		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
 
 		root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/settings_screen.fxml")));
-		setting_screen = new Scene(root, 700,700);
+		setting_screen = new Scene(root, 800,800);
 		setting_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
 
 		JavaFXTemplate.primaryStage = primaryStage;
