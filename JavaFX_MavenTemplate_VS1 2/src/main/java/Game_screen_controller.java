@@ -135,6 +135,8 @@ public class Game_screen_controller {
         }
 
         player1Confirm.setDisable(true);
+        player1AnteTextField.setDisable(true);
+        player1PairPlusTextField.setDisable(true);
         setPlayerWarningText("",1);
         if (player2Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
 
