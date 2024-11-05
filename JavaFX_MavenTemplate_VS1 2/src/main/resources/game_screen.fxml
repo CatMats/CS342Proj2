@@ -29,8 +29,30 @@
         <Button fx:id = "player2Confirm" prefWidth="110" prefHeight="30" text = "Confirm" onAction = "#player2ReadyButton" disable="true" />
 
     </VBox>
+    <HBox fx:id = "player1EmptyCards" AnchorPane.topAnchor = "340" AnchorPane.leftAnchor="33">
+        <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
+            <Image url = "cards/back_of_card.png"/>
+        </ImageView>
+        <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
+            <Image url = "cards/back_of_card.png"/>
+        </ImageView>
+        <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
+            <Image url = "cards/back_of_card.png"/>
+        </ImageView>
+    </HBox>
+    <HBox fx:id = "player2EmptyCards" AnchorPane.topAnchor = "340" AnchorPane.rightAnchor="33">
+        <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
+            <Image url = "cards/back_of_card.png"/>
+        </ImageView>
+        <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
+            <Image url = "cards/back_of_card.png"/>
+        </ImageView>
+        <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
+            <Image url = "cards/back_of_card.png"/>
+        </ImageView>
+    </HBox>
 
-    <Im
+
 
     <Label fx:id = "player1MoneyLabel" text = "xxxx"/>
 
