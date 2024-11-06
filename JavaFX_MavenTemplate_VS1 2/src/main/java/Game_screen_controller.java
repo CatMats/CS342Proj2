@@ -5,7 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -17,6 +18,10 @@ public class Game_screen_controller {
     @FXML
     VBox player2VBOX;
     @FXML
+    Button player1PairPlus;
+    @FXML
+    Button player2PairPlus;
+    @FXML
     Button player1Confirm;
     @FXML
     Button player2Confirm;
@@ -24,6 +29,10 @@ public class Game_screen_controller {
     Label player1WarningLabel;
     @FXML
     Label player2WarningLabel;
+    @FXML
+    HBox player1Hand;
+    @FXML
+    HBox player2Hand;
 
     @FXML
     Button settingButtons;
@@ -41,6 +50,9 @@ public class Game_screen_controller {
     int player1Money;
     int player2Money;
 
+    static Deck theDeck;
+    static Player player1;
+    static Player player2;
     // The function for the settings
     @FXML
     public void settingsButton() throws IOException {
@@ -136,9 +148,17 @@ public class Game_screen_controller {
 
         player1Confirm.setDisable(true);
         player1AnteTextField.setDisable(true);
-        player1PairPlusTextField.setDisable(true);
+        try {
+            player1PairPlusTextField.setDisable(true);
+        }
+        catch (Exception e) {
+            player1PairPlus.setDisable(true);
+        }
         setPlayerWarningText("",1);
-        if (player2Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
+        if (player2Confirm.isDisable()) {
+            selectCards();
+            return;
+        }
 
     }
     public void player2ReadyButton(ActionEvent event) {
@@ -178,6 +198,13 @@ public class Game_screen_controller {
             player2pairBet = Integer.parseInt(pairBet);
         }
         player2Confirm.setDisable(true);
+        player2AnteTextField.setDisable(true);
+        try {
+            player2PairPlusTextField.setDisable(true);
+        }
+        catch (Exception e) {
+            player2PairPlus.setDisable(true);
+        }
         //this.printBets();
         setPlayerWarningText("",2);
         if (player1Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
@@ -202,6 +229,88 @@ public class Game_screen_controller {
     }
 
 
+    // Selects and attempts to display all of the cards for a players' hand
+    public void selectCards() {
+        theDeck = new Deck();
+        player1 = new Player();
+        player2 = new Player();
+        for(int i = 0; i < 3; i++) {player1.hand.add(theDeck.takeCardFromDeck());}
+        for(int i = 0; i < 3; i++) {player2.hand.add(theDeck.takeCardFromDeck());}
+
+        for(int i = 0; i < 3; i++) {
+            // First we gotta get the file of the card in the players hand so lets do that
+            String name_of_file = "";
+            switch (player1.hand.get(i).getValue()) {
+                case 2: name_of_file += "2"; break;
+                case 3: name_of_file += "3"; break;
+                case 4: name_of_file += "4"; break;
+                case 5: name_of_file += "5"; break;
+                case 6: name_of_file += "6"; break;
+                case 7: name_of_file += "7"; break;
+                case 8: name_of_file += "8"; break;
+                case 9: name_of_file += "9"; break;
+                case 10: name_of_file += "10"; break;
+                case 11: name_of_file += "jack"; break;
+                case 12: name_of_file += "queen"; break;
+                case 13: name_of_file += "king"; break;
+                case 14: name_of_file += "ace"; break;
+            }
+            name_of_file += "_of_";
+
+            switch (player1.hand.get(i).getSuit()) {
+                case 'C': name_of_file += "clubs"; break;
+                case 'D': name_of_file += "diamonds"; break;
+                case 'H': name_of_file += "hearts"; break;
+                case 'S': name_of_file += "spades"; break;
+            }
+            name_of_file += ".png";
+            System.out.println(name_of_file);
+            Image cardImage = new Image(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/cards/" + name_of_file)).toExternalForm()));;
+            ImageView card = new ImageView();
+            card.setImage(cardImage);
+            card.setPreserveRatio(true);
+            card.setFitHeight(130);
+            card.setFitWidth(130);
+            player1Hand.getChildren().add(i, card);
+        }
+        for(int i = 0; i < 3; i++) {
+            // First we gotta get the file of the card in the players hand so lets do that
+            String name_of_file = "";
+            switch (player2.hand.get(i).getValue()) {
+                case 2: name_of_file += "2"; break;
+                case 3: name_of_file += "3"; break;
+                case 4: name_of_file += "4"; break;
+                case 5: name_of_file += "5"; break;
+                case 6: name_of_file += "6"; break;
+                case 7: name_of_file += "7"; break;
+                case 8: name_of_file += "8"; break;
+                case 9: name_of_file += "9"; break;
+                case 10: name_of_file += "10"; break;
+                case 11: name_of_file += "jack"; break;
+                case 12: name_of_file += "queen"; break;
+                case 13: name_of_file += "king"; break;
+                case 14: name_of_file += "ace"; break;
+            }
+            name_of_file += "_of_";
+
+            switch (player2.hand.get(i).getSuit()) {
+                case 'C': name_of_file += "clubs"; break;
+                case 'D': name_of_file += "diamonds"; break;
+                case 'H': name_of_file += "hearts"; break;
+                case 'S': name_of_file += "spades"; break;
+            }
+            name_of_file += ".png";
+            System.out.println(name_of_file);
+            Image cardImage = new Image(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/cards/" + name_of_file)).toExternalForm()));;
+            ImageView card = new ImageView();
+            card.setImage(cardImage);
+            card.setPreserveRatio(true);
+            card.setFitHeight(130);
+            card.setFitWidth(130);
+            player2Hand.getChildren().add(i, card);
+        }
+
+    }
 
 }
 

@@ -52,6 +52,8 @@
         </ImageView>
     </HBox>
 
+    <HBox fx:id = "player1Hand" AnchorPane.topAnchor = "340" AnchorPane.leftAnchor="48" spacing = "30"/>
+    <HBox fx:id = "player2Hand" AnchorPane.topAnchor = "340" AnchorPane.rightAnchor="48" spacing = "30"/>
 
 
     <Label fx:id = "player1MoneyLabel" text = "xxxx"/>
