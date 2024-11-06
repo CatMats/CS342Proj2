@@ -158,7 +158,7 @@ public class Game_screen_controller {
             player1PairPlus.setDisable(true);
         }
         setPlayerWarningText("",1);
-        if (player2Confirm.isDisable()) {
+        if (player2Confirm.isDisable() && player2AnteBet > 0) {
             selectCards();
             return;
         }
@@ -210,7 +210,7 @@ public class Game_screen_controller {
         }
         //this.printBets();
         setPlayerWarningText("",2);
-        if (player1Confirm.isDisable()) {
+        if (player1Confirm.isDisable() && player1AnteBet > 0) {
             selectCards();
             return;
         }

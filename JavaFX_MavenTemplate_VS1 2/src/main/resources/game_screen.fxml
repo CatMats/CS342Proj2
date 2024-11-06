@@ -14,23 +14,23 @@
             prefHeight="700.0" prefWidth="700.0">
     <Button fx:id = "settingButtons" text = "Settings" onAction="#settingsButton" prefWidth="100" prefHeight="50"/>
 
-    <Label  fx:id = "player1WarningLabel" AnchorPane.leftAnchor="160"  AnchorPane.bottomAnchor="100" alignment= "CENTER"/>
-    <Label  fx:id = "player2WarningLabel" AnchorPane.rightAnchor="110"  AnchorPane.bottomAnchor="100" alignment= "CENTER"/>
+    <Label  fx:id = "player1WarningLabel" AnchorPane.leftAnchor="290"  AnchorPane.bottomAnchor="100" alignment= "CENTER"/>
+    <Label  fx:id = "player2WarningLabel" AnchorPane.rightAnchor="240"  AnchorPane.bottomAnchor="100" alignment= "CENTER"/>
 
-    <VBox fx:id = "player1VBOX" prefWidth="110" spacing="10" AnchorPane.leftAnchor="160" AnchorPane.bottomAnchor="140">
+    <VBox fx:id = "player1VBOX" prefWidth="110" spacing="10" AnchorPane.leftAnchor="290" AnchorPane.bottomAnchor="140">
         <Label fx:id = "player1Label" prefWidth="110"  text = "Player 1" alignment= "CENTER"/>
         <Button fx:id = "player1Ante" prefWidth="110" prefHeight="50" text = "Ante" onAction="#player1AnteClick"/>
         <Button fx:id = "player1PairPlus" prefWidth="110" prefHeight="50" text = "Pair Plus" onAction = "#player1PairPlus"/>
         <Button fx:id = "player1Confirm" prefWidth="110" prefHeight="30" text = "Confirm" onAction = "#player1ReadyButton" disable="true"/>
     </VBox>
-    <VBox fx:id = "player2VBOX" prefWidth="110" spacing="10" AnchorPane.rightAnchor="160" AnchorPane.bottomAnchor="140">
+    <VBox fx:id = "player2VBOX" prefWidth="110" spacing="10" AnchorPane.rightAnchor="290" AnchorPane.bottomAnchor="140">
         <Label fx:id = "player2Label" prefWidth="110" text = "Player 2" alignment= "CENTER"/>
         <Button fx:id = "player2Ante" prefWidth="110" prefHeight="50" text = "Ante" onAction="#player2AnteClick"/>
         <Button fx:id = "player2PairPlus" prefWidth="110" prefHeight="50" text = "Pair Plus" onAction="#player2PairPlus"/>
         <Button fx:id = "player2Confirm" prefWidth="110" prefHeight="30" text = "Confirm" onAction = "#player2ReadyButton" disable="true" />
 
     </VBox>
-    <HBox fx:id = "player1EmptyCards" AnchorPane.topAnchor = "340" AnchorPane.leftAnchor="33">
+    <HBox fx:id = "player1EmptyCards" AnchorPane.topAnchor = "340" AnchorPane.leftAnchor="163">
         <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
             <Image url = "cards/back_of_card.png"/>
         </ImageView>
@@ -41,7 +41,7 @@
             <Image url = "cards/back_of_card.png"/>
         </ImageView>
     </HBox>
-    <HBox fx:id = "player2EmptyCards" AnchorPane.topAnchor = "340" AnchorPane.rightAnchor="33">
+    <HBox fx:id = "player2EmptyCards" AnchorPane.topAnchor = "340" AnchorPane.rightAnchor="163">
         <ImageView fitHeight="120" fitWidth="120" preserveRatio="true" >
             <Image url = "cards/back_of_card.png"/>
         </ImageView>
@@ -66,8 +66,8 @@
     </HBox>
 
 
-    <HBox fx:id = "player1Hand" AnchorPane.topAnchor = "340" AnchorPane.leftAnchor="48" spacing = "30"/>
-    <HBox fx:id = "player2Hand" AnchorPane.topAnchor = "340" AnchorPane.rightAnchor="48" spacing = "30"/>
+    <HBox fx:id = "player1Hand" AnchorPane.topAnchor = "340" AnchorPane.leftAnchor="178" spacing = "30"/>
+    <HBox fx:id = "player2Hand" AnchorPane.topAnchor = "340" AnchorPane.rightAnchor="178" spacing = "30"/>
 
     <Line fx:id = "horizontalLine" layoutX = "0" layoutY="330.0" endX = "2000" />
     <Line fx:id = "middleVerticalLine" layoutX="760" layoutY = "330" endY ="900"/>
