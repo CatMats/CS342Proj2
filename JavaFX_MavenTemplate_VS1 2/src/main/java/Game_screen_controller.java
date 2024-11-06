@@ -14,6 +14,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -293,8 +294,18 @@ public class Game_screen_controller implements Initializable {
 
     // Selects and attempts to display all of the cards for a players' hand
     public void selectCards() {
-        for(int i = 0; i < 3; i++) {player1.hand.add(theDeck.takeCardFromDeck());}
-        for(int i = 0; i < 3; i++) {player2.hand.add(theDeck.takeCardFromDeck());}
+        //for(int i = 0; i < 3; i++) {player1.hand.add(theDeck.takeCardFromDeck());}
+        //for(int i = 0; i < 3; i++) {player2.hand.add(theDeck.takeCardFromDeck());}
+        ArrayList<Card> dealtHand = new ArrayList<>();
+        dealtHand = dealer.dealHand();
+        for(int i = 0; i < 3; i++) {
+            player1.hand.add(dealtHand.get(i));
+        }
+        ArrayList<Card> dealt2Hand = new ArrayList<>();
+        dealt2Hand = dealer.dealHand();
+        for(int i = 0; i < 3; i++) {
+            player2.hand.add(dealt2Hand.get(i));
+        }
 
         for(int i = 0; i < 3; i++) {
             // First we gotta get the file of the card in the players hand so lets do that
@@ -415,6 +426,12 @@ public class Game_screen_controller implements Initializable {
         player2HoldButton.setDisable(true);
         if (player1PlayButton.isDisable()) {return;} //TODO: Next step of the game
     }
+
+    public void updatePlayerWinningsLabel() {
+        player1WinningsLabel.setText("Total Winnings: " + player1.totalWinnings);
+        player2WinningsLabel.setText("Total Winnings: " + player2.totalWinnings);
+    }
+
 
 
 }

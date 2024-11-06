@@ -12,8 +12,8 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="Game_screen_controller"
             prefHeight="700.0" prefWidth="700.0">
-    <Button fx:id = "settingButtons" text = "Settings" onAction="#settingsButton" prefWidth="100" prefHeight="50"/>
-    <Label fx:id = "dealerLabel" AnchorPane.leftAnchor="740" text = "Dealer" textAlignment="CENTER" alignment="CENTER"/>
+    <Button fx:id = "settingButtons" text = "Settings" onAction = "#settingsButton" prefWidth = "100" prefHeight = "50"/>
+    <Label fx:id = "dealerLabel" AnchorPane.leftAnchor = "740" AnchorPane.topAnchor = "20" text = "Dealer" textAlignment = "CENTER" alignment = "CENTER"/>
 
 
     <Label  fx:id = "player1WarningLabel" AnchorPane.leftAnchor = "290"  AnchorPane.bottomAnchor = "100" alignment = "CENTER"/>
@@ -74,12 +74,11 @@
     <Line fx:id = "horizontalLine" layoutX = "0" layoutY = "330.0" endX = "2000" />
     <Line fx:id = "middleVerticalLine" layoutX = "760" layoutY = "330" endY ="900"/>
 
-    <Label fx:id = "player1WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.leftAnchor = "600" AnchorPane.topAnchor= "750"/>
-    <Label fx:id = "player2WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.rightAnchor = "640" AnchorPane.topAnchor= "750"/>
+    <Label fx:id = "player1WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.leftAnchor  = "600" AnchorPane.topAnchor = "750" textAlignment = "RIGHT"/>
+    <Label fx:id = "player2WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.rightAnchor = "640" AnchorPane.topAnchor = "750" textAlignment = "LEFT"/>
 
     <VBox fx:id = "player1PlayVbox" AnchorPane.leftAnchor = "290" AnchorPane.bottomAnchor = "235" visible = "false" spacing = "10">
         <Label fx:id = "player1Label2" prefWidth = "160" text = "Player 1" alignment = "CENTER"/>
-
         <HBox fx:id = "player1PlayBet" prefWidth = "160" spacing = "10" alignment = "CENTER">
             <Button fx:id = "player1PlayButton" text = "Play" prefWidth = "160" prefHeight = "50" onAction = "#setPlayer1PlayButton"/>
             <Button fx:id = "player1HoldButton" text = "Hold" prefWidth = "160" prefHeight = "50" onAction = "#setPlayer1HoldButton"/>
@@ -88,7 +87,6 @@
 
     <VBox fx:id = "player2PlayVbox" AnchorPane.rightAnchor = "290" AnchorPane.bottomAnchor = "235" visible = "false" spacing = "10">
         <Label fx:id = "player2Label2" prefWidth = "160" text = "Player 2" alignment = "CENTER"/>
-
         <HBox fx:id = "player2PlayBet" prefWidth = "160" spacing = "10" alignment = "CENTER">
             <Button fx:id = "player2PlayButton" text = "Play" prefWidth = "160" prefHeight = "50" onAction = "#setPlayer2PlayButton"/>
             <Button fx:id = "player2HoldButton" text = "Hold" prefWidth = "160" prefHeight = "50" onAction = "#setPlayer2HoldButton"/>
