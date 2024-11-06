@@ -64,6 +64,8 @@ public class Game_screen_controller implements Initializable {
     @FXML
     public HBox dealerHand;
     @FXML
+    public Label gameStatus;
+    @FXML
     VBox player1VBOX;
     @FXML
     VBox player2VBOX;
@@ -406,6 +408,7 @@ public class Game_screen_controller implements Initializable {
         player1PlayStatus = true;
         player1PlayButton.setDisable(true);
         player1HoldButton.setDisable(true);
+        player1.playBet = player1.anteBet;
         if (player2PlayButton.isDisable()) {setDealershand();}
     }
     public void setPlayer1HoldButton() {
@@ -418,6 +421,7 @@ public class Game_screen_controller implements Initializable {
         player2PlayStatus = true;
         player2PlayButton.setDisable(true);
         player2HoldButton.setDisable(true);
+        player2.playBet = player2.anteBet;
         if (player2PlayButton.isDisable()) {setDealershand();}
     }
     public void setPlayer2HoldButton() {
@@ -435,6 +439,8 @@ public class Game_screen_controller implements Initializable {
 
     // Sets up the Dealer hand logically & visually
     public void setDealershand() {
+        player1PlayVbox.setVisible(false);
+        player2PlayVbox.setVisible(false);
         dealer.dealersHand = dealer.dealHand();
         for (int i = 0; i < 3; i++) {
             // First we gotta get the file of the card in the players hand so lets do that
@@ -507,7 +513,66 @@ public class Game_screen_controller implements Initializable {
             card.setFitWidth(130);
             dealerHand.getChildren().add(i, card);
         }
+        calculateResults();
     }
 
+    // Checks to see which bets were won and which ones are lost
+    public void calculateResults() {
+        // if player1 chose to play
+        String status = "";
+        if(player1PlayStatus == true) {
+            switch (ThreeCardLogic.compareHands(dealer.dealersHand, player1.hand)) {
+                case 2: {
+                    status += "Player 1 has won the Ante Bet!\n";
+                    player1.totalWinnings += player1.anteBet * 2 + player1.pairPlusBet * 2;
+                    break;
+                }
+                case 0: {
+                    status += "Player 1 has lost the Ante Bet!\n";
+                    break;
+                }
+            }
+            int pairPlusWinnings = ThreeCardLogic.evalPPWinnings(player1.hand, player1.pairPlusBet);
+            // Checks if the player has placed a bet and they didn't hold
+            if (ThreeCardLogic.evalPPWinnings(player1.hand, player1.pairPlusBet) > 0) {
+                if (ThreeCardLogic.evalPPWinnings(player1.hand, player1.pairPlusBet) > 0 && player1PlayStatus) {
+                    status += "Player 1 has won the Pair Plus Bet!\n";
+                    player1.totalWinnings += pairPlusWinnings;
+                } else if (ThreeCardLogic.evalPPWinnings(player1.hand, player1.pairPlusBet) > 0 && !player1PlayStatus) {
+                    status += "Player 1 would have won the Pair Plus Bet if they stayed...\n";
+                } else {
+                    status += "Player 1 has lost the Pair Plus Bet!\n";
+                }
+            }
+        }
+        if(player2PlayStatus == true) {
+            switch (ThreeCardLogic.compareHands(dealer.dealersHand, player2.hand)) {
+                case 2: {
+                    status += "Player 2 has won the Ante Bet!\n";
+                    player2.totalWinnings += player2.anteBet * 2 + player2.pairPlusBet * 2;
+                    break;
+                }
+                case 0: {
+                    status += "Player 1 has lost the Ante Bet!\n";
+                    break;
+                }
+            }
+            int pairPlusWinnings = ThreeCardLogic.evalPPWinnings(player2.hand, player2.pairPlusBet);
+            // Checks if the player has placed a bet and they didn't hold
+            if (ThreeCardLogic.evalPPWinnings(player1.hand, player1.pairPlusBet) > 0) {
+                if (ThreeCardLogic.evalPPWinnings(player2.hand, player2.pairPlusBet) > 0 && player2PlayStatus) {
+                    status += "Player 2 has won the Pair Plus Bet!\n";
+                    player2.totalWinnings += pairPlusWinnings;
+                } else if (ThreeCardLogic.evalPPWinnings(player2.hand, player2.pairPlusBet) > 0 && !player2PlayStatus) {
+                    status += "Player 2 would have won the Pair Plus Bet if they stayed...\n";
+                } else {
+                    status += "Player 2 has lost the Pair Plus Bet!\n";
+                }
+            }
+
+        }
+        gameStatus.setText(status);
+        updatePlayerWinningsLabel();
+    }
 }
 
