@@ -62,6 +62,8 @@ public class Game_screen_controller implements Initializable {
     @FXML
     public Button player2HoldButton;
     @FXML
+    public HBox dealerHand;
+    @FXML
     VBox player1VBOX;
     @FXML
     VBox player2VBOX;
@@ -95,7 +97,6 @@ public class Game_screen_controller implements Initializable {
     TextField player2PairPlusTextField;
 
 
-    static Deck theDeck;
     static Player player1;
     static Player player2;
     static Dealer dealer;
@@ -105,7 +106,6 @@ public class Game_screen_controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        theDeck = new Deck();
         player1 = new Player();
         player2 = new Player();
         dealer = new Dealer();
@@ -334,7 +334,7 @@ public class Game_screen_controller implements Initializable {
                 case 'S': name_of_file += "spades"; break;
             }
             name_of_file += ".png";
-            System.out.println(name_of_file);
+            //System.out.println(name_of_file);
             Image cardImage = new Image(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/cards/" + name_of_file)).toExternalForm()));;
             ImageView card = new ImageView();
             card.setImage(cardImage);
@@ -373,7 +373,7 @@ public class Game_screen_controller implements Initializable {
                 case 'S': name_of_file += "spades"; break;
             }
             name_of_file += ".png";
-            System.out.println(name_of_file);
+            //System.out.println(name_of_file);
             Image cardImage = new Image(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/cards/" + name_of_file)).toExternalForm()));;
             ImageView card = new ImageView();
             card.setImage(cardImage);
@@ -406,33 +406,108 @@ public class Game_screen_controller implements Initializable {
         player1PlayStatus = true;
         player1PlayButton.setDisable(true);
         player1HoldButton.setDisable(true);
-        if (player2PlayButton.isDisable()) {return;} //TODO: Next step of the game
+        if (player2PlayButton.isDisable()) {setDealershand();}
     }
     public void setPlayer1HoldButton() {
         player1PlayStatus = false;
         player1PlayButton.setDisable(true);
         player1HoldButton.setDisable(true);
-        if (player2PlayButton.isDisable()) {return;} //TODO: Next step of the game
+        if (player2PlayButton.isDisable()) {setDealershand();}
     }
     public void setPlayer2PlayButton() {
         player2PlayStatus = true;
         player2PlayButton.setDisable(true);
         player2HoldButton.setDisable(true);
-        if (player2PlayButton.isDisable()) {return;} //TODO: Next step of the game
+        if (player2PlayButton.isDisable()) {setDealershand();}
     }
     public void setPlayer2HoldButton() {
         player2PlayStatus = false;
         player2PlayButton.setDisable(true);
         player2HoldButton.setDisable(true);
-        if (player1PlayButton.isDisable()) {return;} //TODO: Next step of the game
+        if (player1PlayButton.isDisable()) {setDealershand();}
     }
 
+    // Updates the labels for winnings when called
     public void updatePlayerWinningsLabel() {
         player1WinningsLabel.setText("Total Winnings: " + player1.totalWinnings);
         player2WinningsLabel.setText("Total Winnings: " + player2.totalWinnings);
     }
 
+    // Sets up the Dealer hand logically & visually
+    public void setDealershand() {
+        dealer.dealersHand = dealer.dealHand();
+        for (int i = 0; i < 3; i++) {
+            // First we gotta get the file of the card in the players hand so lets do that
+            String name_of_file = "";
+            switch (dealer.dealersHand.get(i).getValue()) {
+                case 2:
+                    name_of_file += "2";
+                    break;
+                case 3:
+                    name_of_file += "3";
+                    break;
+                case 4:
+                    name_of_file += "4";
+                    break;
+                case 5:
+                    name_of_file += "5";
+                    break;
+                case 6:
+                    name_of_file += "6";
+                    break;
+                case 7:
+                    name_of_file += "7";
+                    break;
+                case 8:
+                    name_of_file += "8";
+                    break;
+                case 9:
+                    name_of_file += "9";
+                    break;
+                case 10:
+                    name_of_file += "10";
+                    break;
+                case 11:
+                    name_of_file += "jack";
+                    break;
+                case 12:
+                    name_of_file += "queen";
+                    break;
+                case 13:
+                    name_of_file += "king";
+                    break;
+                case 14:
+                    name_of_file += "ace";
+                    break;
+            }
+            name_of_file += "_of_";
 
+            switch (dealer.dealersHand.get(i).getSuit()) {
+                case 'C':
+                    name_of_file += "clubs";
+                    break;
+                case 'D':
+                    name_of_file += "diamonds";
+                    break;
+                case 'H':
+                    name_of_file += "hearts";
+                    break;
+                case 'S':
+                    name_of_file += "spades";
+                    break;
+            }
+            name_of_file += ".png";
+            //System.out.println(name_of_file);
+            Image cardImage = new Image(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/cards/" + name_of_file)).toExternalForm()));
+            ;
+            ImageView card = new ImageView();
+            card.setImage(cardImage);
+            card.setPreserveRatio(true);
+            card.setFitHeight(130);
+            card.setFitWidth(130);
+            dealerHand.getChildren().add(i, card);
+        }
+    }
 
 }
 

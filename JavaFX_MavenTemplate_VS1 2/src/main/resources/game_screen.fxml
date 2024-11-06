@@ -70,6 +70,8 @@
 
     <HBox fx:id = "player1Hand" AnchorPane.topAnchor = "340" AnchorPane.leftAnchor = "178" spacing = "30"/>
     <HBox fx:id = "player2Hand" AnchorPane.topAnchor = "340" AnchorPane.rightAnchor = "178" spacing = "30"/>
+    <HBox fx:id = "dealerHand" AnchorPane.topAnchor = "50" AnchorPane.leftAnchor = "590" spacing = "30"/>
+
 
     <Line fx:id = "horizontalLine" layoutX = "0" layoutY = "330.0" endX = "2000" />
     <Line fx:id = "middleVerticalLine" layoutX = "760" layoutY = "330" endY ="900"/>
