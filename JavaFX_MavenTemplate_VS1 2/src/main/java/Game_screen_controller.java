@@ -66,6 +66,8 @@ public class Game_screen_controller implements Initializable {
     @FXML
     public Label gameStatus;
     @FXML
+    public Button continueButton;
+    @FXML
     VBox player1VBOX;
     @FXML
     VBox player2VBOX;
@@ -415,6 +417,8 @@ public class Game_screen_controller implements Initializable {
         player1PlayStatus = false;
         player1PlayButton.setDisable(true);
         player1HoldButton.setDisable(true);
+        player1.totalWinnings += -1 * (player1.anteBet += player1.pairPlusBet);
+        updatePlayerWinningsLabel();
         if (player2PlayButton.isDisable()) {setDealershand();}
     }
     public void setPlayer2PlayButton() {
@@ -428,6 +432,8 @@ public class Game_screen_controller implements Initializable {
         player2PlayStatus = false;
         player2PlayButton.setDisable(true);
         player2HoldButton.setDisable(true);
+        player2.totalWinnings += -1 * (player2.anteBet += player2.pairPlusBet);
+        updatePlayerWinningsLabel();
         if (player1PlayButton.isDisable()) {setDealershand();}
     }
 
@@ -572,7 +578,51 @@ public class Game_screen_controller implements Initializable {
 
         }
         gameStatus.setText(status);
+        continueButton.setDisable(false);
         updatePlayerWinningsLabel();
     }
+
+    // Resets the game for the next round!
+    public void restartGame() {
+        continueButton.setDisable(true);
+        player1.hand.clear();
+        player1.pairPlusBet = 0;
+        player1.playBet = 0;
+        player1.anteBet = 0;
+
+        player2.hand.clear();
+        player2.pairPlusBet = 0;
+        player2.playBet = 0;
+        player2.anteBet = 0;
+        dealer.dealersHand.clear();
+        swapGamePhases(true);
+
+        player1AnteTextField.setDisable(false);
+        try {
+            player1PairPlus.setDisable(false);
+        } catch (Exception e) {
+            player1PairPlusTextField.setDisable(false);
+        }
+        player1Confirm.setDisable(false);
+        player1PlayButton.setDisable(false);
+        player1HoldButton.setDisable(false);
+        player2AnteTextField.setDisable(false);
+        try {
+            player2PairPlus.setDisable(false);
+        } catch (Exception e) {
+            player2PairPlusTextField.setDisable(false);
+        }
+        player2Confirm.setDisable(false);
+        player2PlayButton.setDisable(false);
+        player2HoldButton.setDisable(false);
+
+
+        player1Hand.getChildren().clear();
+        player2Hand.getChildren().clear();
+        dealerHand.getChildren().clear();
+
+
+    }
+
 }
 

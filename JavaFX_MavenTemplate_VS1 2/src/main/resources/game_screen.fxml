@@ -95,5 +95,5 @@
         </HBox>
     </VBox>
 
-
+    <Button fx:id = "continueButton" text = "Continue!" onAction = "#restartGame" prefWidth = "160" prefHeight = "40" AnchorPane.leftAnchor = "680" AnchorPane.topAnchor = "275" disable="true"/>
 </AnchorPane>
