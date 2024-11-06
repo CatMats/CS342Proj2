@@ -1,3 +1,4 @@
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +8,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -207,9 +210,10 @@ public class Game_screen_controller {
         }
         //this.printBets();
         setPlayerWarningText("",2);
-        if (player1Confirm.isDisable()) {return;} //TODO: Move to the next step of the game
-
-
+        if (player1Confirm.isDisable()) {
+            selectCards();
+            return;
+        }
     }
 
     // Sets the warning text for a player.  Called from hitting the confirm button and alerts the player that something has gone wrong
@@ -234,6 +238,12 @@ public class Game_screen_controller {
         theDeck = new Deck();
         player1 = new Player();
         player2 = new Player();
+        player1.anteBet = player1AnteBet;
+        player1.playBet = player1pairBet;
+        player2.anteBet = player2AnteBet;
+        player2.playBet = player2pairBet;
+        player1.totalWinnings = player1Money;
+        player2.totalWinnings = player2Money;
         for(int i = 0; i < 3; i++) {player1.hand.add(theDeck.takeCardFromDeck());}
         for(int i = 0; i < 3; i++) {player2.hand.add(theDeck.takeCardFromDeck());}
 
@@ -272,6 +282,9 @@ public class Game_screen_controller {
             card.setFitHeight(130);
             card.setFitWidth(130);
             player1Hand.getChildren().add(i, card);
+            //PauseTransition delay = new PauseTransition(Duration.millis(1000));
+            //delay.setOnFinished(event -> continue;)
+            //delay.play();
         }
         for(int i = 0; i < 3; i++) {
             // First we gotta get the file of the card in the players hand so lets do that

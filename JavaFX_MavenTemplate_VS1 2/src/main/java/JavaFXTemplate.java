@@ -53,6 +53,7 @@ public class JavaFXTemplate extends Application {
 		JavaFXTemplate.primaryStage = primaryStage;
 		primaryStage.setTitle("Three Card Poker");
 		primaryStage.setScene(main_menu_screen);
+		primaryStage.setMaximized(true);
 		primaryStage.show();
 	}
 	// Reference for primaryStage for other classes
@@ -72,6 +73,8 @@ public class JavaFXTemplate extends Application {
 				primaryStage.setScene(setting_screen);
 				break;
 		}
+		primaryStage.setMaximized(false);
+		primaryStage.setMaximized(true);
 
 	}
 
