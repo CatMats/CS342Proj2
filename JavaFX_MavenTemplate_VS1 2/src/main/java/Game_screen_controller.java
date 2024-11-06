@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -18,6 +19,27 @@ import java.util.ResourceBundle;
 
 public class Game_screen_controller implements Initializable {
 
+
+    @FXML
+    public Label dealerLabel;
+    @FXML
+    public Label player1Label;
+    @FXML
+    public Button player1Ante;
+    @FXML
+    public Label player2Label;
+    @FXML
+    public Button player2Ante;
+    @FXML
+    public HBox player1EmptyCards;
+    @FXML
+    public HBox player2EmptyCards;
+    @FXML
+    public HBox dealerEmptyCards;
+    @FXML
+    public Line horizontalLine;
+    @FXML
+    public Line middleVerticalLine;
     @FXML
     VBox player1VBOX;
     @FXML
