@@ -72,7 +72,8 @@
     <Line fx:id = "horizontalLine" layoutX = "0" layoutY="330.0" endX = "2000" />
     <Line fx:id = "middleVerticalLine" layoutX="760" layoutY = "330" endY ="900"/>
 
-    <Label fx:id = "player1MoneyLabel" text = "xxxx"/>
+    <Label fx:id = "player1WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.leftAnchor = "600" AnchorPane.topAnchor="750"/>
+    <Label fx:id = "player2WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.rightAnchor = "640" AnchorPane.topAnchor="750"/>
 
 
 </AnchorPane>

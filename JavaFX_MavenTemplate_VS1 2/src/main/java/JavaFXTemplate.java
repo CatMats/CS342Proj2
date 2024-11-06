@@ -54,6 +54,7 @@ public class JavaFXTemplate extends Application {
 		primaryStage.setTitle("Three Card Poker");
 		primaryStage.setScene(main_menu_screen);
 		primaryStage.setMaximized(true);
+		//primaryStage.setFullScreen(true);
 		primaryStage.show();
 	}
 	// Reference for primaryStage for other classes

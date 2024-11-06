@@ -1,6 +1,7 @@
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,10 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class Game_screen_controller {
-
+public class Game_screen_controller implements Initializable {
 
     @FXML
     VBox player1VBOX;
@@ -33,6 +35,10 @@ public class Game_screen_controller {
     @FXML
     Label player2WarningLabel;
     @FXML
+    Label player1WinningsLabel;
+    @FXML
+    Label player2WinningsLabel;
+    @FXML
     HBox player1Hand;
     @FXML
     HBox player2Hand;
@@ -44,18 +50,27 @@ public class Game_screen_controller {
     TextField player1PairPlusTextField;
     TextField player2AnteTextField;
     TextField player2PairPlusTextField;
-    static int player1AnteBet;
-    static int player2AnteBet;
-    static int player1pairBet = 0;
-    static int player2pairBet = 0;
 
-
-    int player1Money;
-    int player2Money;
 
     static Deck theDeck;
     static Player player1;
     static Player player2;
+    static Dealer dealer;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        theDeck = new Deck();
+        player1 = new Player();
+        player2 = new Player();
+        dealer = new Dealer();
+
+
+        player1.totalWinnings = 0;
+        player2.totalWinnings = 0;
+    }
+
+
+
     // The function for the settings
     @FXML
     public void settingsButton() throws IOException {
@@ -133,7 +148,7 @@ public class Game_screen_controller {
             return;
         }
 
-        player1AnteBet = Integer.parseInt(anteBet);
+        player1.anteBet = Integer.parseInt(anteBet);
 
         // If PairPlusBet is valid, then we go here and check stuff
         if (!Objects.equals(pairBet, "FAILED")) {
@@ -146,7 +161,7 @@ public class Game_screen_controller {
                 setPlayerWarningText("Pair Plus Bet is too low! \nMinimum bet is $5!",1);
                 return;
             }
-            player1pairBet = Integer.parseInt(pairBet);
+            player1.pairPlusBet = Integer.parseInt(pairBet);
         }
 
         player1Confirm.setDisable(true);
@@ -158,7 +173,7 @@ public class Game_screen_controller {
             player1PairPlus.setDisable(true);
         }
         setPlayerWarningText("",1);
-        if (player2Confirm.isDisable() && player2AnteBet > 0) {
+        if (player2Confirm.isDisable() && player2.anteBet > 0) {
             selectCards();
             return;
         }
@@ -185,7 +200,7 @@ public class Game_screen_controller {
             setPlayerWarningText("Ante Bet is too low! \nMinimum bet is $5!",2);
             return;
         }
-        player2AnteBet = Integer.parseInt(anteBet);
+        player2.anteBet = Integer.parseInt(anteBet);
         // If PairPlusBet is valid, then we go here and check stuff
         if (!Objects.equals(pairBet, "FAILED")) {
             for (char c : pairBet.toCharArray()) {
@@ -198,7 +213,7 @@ public class Game_screen_controller {
                 setPlayerWarningText("Pair Plus Bet is too low! \nMinimum bet is $5!",2);
                 return;
             }
-            player2pairBet = Integer.parseInt(pairBet);
+            player2.pairPlusBet = Integer.parseInt(pairBet);
         }
         player2Confirm.setDisable(true);
         player2AnteTextField.setDisable(true);
@@ -210,7 +225,7 @@ public class Game_screen_controller {
         }
         //this.printBets();
         setPlayerWarningText("",2);
-        if (player1Confirm.isDisable() && player1AnteBet > 0) {
+        if (player1Confirm.isDisable() && player1.anteBet > 0) {
             selectCards();
             return;
         }
@@ -228,22 +243,13 @@ public class Game_screen_controller {
 
     // Prints out bet stats for testing
     public static void printBets() {
-        System.out.println("Player 1:" + player1AnteBet + "," + player1pairBet);
-        System.out.println("Player 2:" + player2AnteBet + "," + player2pairBet);
+        System.out.println("Player 1:" + player1.anteBet + "," + player1.pairPlusBet);
+        System.out.println("Player 2:" + player2.anteBet + "," + player2.pairPlusBet);
     }
 
 
     // Selects and attempts to display all of the cards for a players' hand
     public void selectCards() {
-        theDeck = new Deck();
-        player1 = new Player();
-        player2 = new Player();
-        player1.anteBet = player1AnteBet;
-        player1.playBet = player1pairBet;
-        player2.anteBet = player2AnteBet;
-        player2.playBet = player2pairBet;
-        player1.totalWinnings = player1Money;
-        player2.totalWinnings = player2Money;
         for(int i = 0; i < 3; i++) {player1.hand.add(theDeck.takeCardFromDeck());}
         for(int i = 0; i < 3; i++) {player2.hand.add(theDeck.takeCardFromDeck());}
 
@@ -325,5 +331,12 @@ public class Game_screen_controller {
 
     }
 
+    // Setups the game screen for a play bet and hides all old ui elements
+    public void setUpPlayBet() {
+        player1VBOX.setVisible(false);
+        player2VBOX.setVisible(false);
+        player1WarningLabel.setVisible(false);
+        player2WarningLabel.setVisible(false);
+    }
 }
 
