@@ -41,6 +41,26 @@ public class Game_screen_controller implements Initializable {
     @FXML
     public Line middleVerticalLine;
     @FXML
+    public VBox player1PlayVbox;
+    @FXML
+    public Label player1Label2;
+    @FXML
+    public HBox player1PlayBet;
+    @FXML
+    public Button player1PlayButton;
+    @FXML
+    public Button player1HoldButton;
+    @FXML
+    public VBox player2PlayVbox;
+    @FXML
+    public Label player2Label2;
+    @FXML
+    public HBox player2PlayBet;
+    @FXML
+    public Button player2PlayButton;
+    @FXML
+    public Button player2HoldButton;
+    @FXML
     VBox player1VBOX;
     @FXML
     VBox player2VBOX;
@@ -78,6 +98,9 @@ public class Game_screen_controller implements Initializable {
     static Player player1;
     static Player player2;
     static Dealer dealer;
+    boolean player1PlayStatus;
+    boolean player2PlayStatus;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -262,13 +285,11 @@ public class Game_screen_controller implements Initializable {
         }
     }
 
-
     // Prints out bet stats for testing
     public static void printBets() {
         System.out.println("Player 1:" + player1.anteBet + "," + player1.pairPlusBet);
         System.out.println("Player 2:" + player2.anteBet + "," + player2.pairPlusBet);
     }
-
 
     // Selects and attempts to display all of the cards for a players' hand
     public void selectCards() {
@@ -350,15 +371,51 @@ public class Game_screen_controller implements Initializable {
             card.setFitWidth(130);
             player2Hand.getChildren().add(i, card);
         }
-
+        setUpPlayBet();
     }
 
     // Setups the game screen for a play bet and hides all old ui elements
     public void setUpPlayBet() {
-        player1VBOX.setVisible(false);
-        player2VBOX.setVisible(false);
-        player1WarningLabel.setVisible(false);
-        player2WarningLabel.setVisible(false);
+        swapGamePhases(false);
+
     }
+
+    // Swaps between setting up Play Bet with the Ante/Pair Bet
+    public void swapGamePhases(boolean value) {
+        player1VBOX.setVisible(value);
+        player2VBOX.setVisible(value);
+        player1WarningLabel.setVisible(value);
+        player2WarningLabel.setVisible(value);
+        player1PlayVbox.setVisible(!value);
+        player2PlayVbox.setVisible(!value);
+    }
+
+    // Sets the respective player with the respective status
+    public void setPlayer1PlayButton() {
+        player1PlayStatus = true;
+        player1PlayButton.setDisable(true);
+        player1HoldButton.setDisable(true);
+        if (player2PlayButton.isDisable()) {return;} //TODO: Next step of the game
+    }
+    public void setPlayer1HoldButton() {
+        player1PlayStatus = false;
+        player1PlayButton.setDisable(true);
+        player1HoldButton.setDisable(true);
+        if (player2PlayButton.isDisable()) {return;} //TODO: Next step of the game
+    }
+    public void setPlayer2PlayButton() {
+        player2PlayStatus = true;
+        player2PlayButton.setDisable(true);
+        player2HoldButton.setDisable(true);
+        if (player2PlayButton.isDisable()) {return;} //TODO: Next step of the game
+    }
+    public void setPlayer2HoldButton() {
+        player2PlayStatus = false;
+        player2PlayButton.setDisable(true);
+        player2HoldButton.setDisable(true);
+        if (player1PlayButton.isDisable()) {return;} //TODO: Next step of the game
+    }
+
+
 }
 
