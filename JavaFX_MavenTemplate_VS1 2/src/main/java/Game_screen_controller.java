@@ -345,10 +345,11 @@ public class Game_screen_controller implements Initializable {
             card.setPreserveRatio(true);
             card.setFitHeight(130);
             card.setFitWidth(130);
-            player1Hand.getChildren().add(i, card);
-            //PauseTransition delay = new PauseTransition(Duration.millis(1000));
-            //delay.setOnFinished(event -> continue;)
-            //delay.play();
+            int duration = 1000 * (i + 1);
+            PauseTransition delay = new PauseTransition(Duration.millis(duration));
+            int finalI = i;
+            delay.setOnFinished(event -> {player1Hand.getChildren().add(finalI, card);});
+            delay.play();
         }
         for(int i = 0; i < 3; i++) {
             // First we gotta get the file of the card in the players hand so lets do that
@@ -384,7 +385,11 @@ public class Game_screen_controller implements Initializable {
             card.setPreserveRatio(true);
             card.setFitHeight(130);
             card.setFitWidth(130);
-            player2Hand.getChildren().add(i, card);
+            int duration = 1000 * (i + 1);
+            PauseTransition delay = new PauseTransition(Duration.millis(duration));
+            int finalI = i;
+            delay.setOnFinished(event -> {player2Hand.getChildren().add(finalI, card);});
+            delay.play();
         }
         setUpPlayBet();
     }
@@ -517,7 +522,11 @@ public class Game_screen_controller implements Initializable {
             card.setPreserveRatio(true);
             card.setFitHeight(130);
             card.setFitWidth(130);
-            dealerHand.getChildren().add(i, card);
+            int duration = 1000 * (i + 1);
+            PauseTransition delay = new PauseTransition(Duration.millis(duration));
+            int finalI = i;
+            delay.setOnFinished(event -> {dealerHand.getChildren().add(finalI, card);});
+            delay.play();
         }
         calculateResults();
     }
