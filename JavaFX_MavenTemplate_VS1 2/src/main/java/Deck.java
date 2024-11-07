@@ -9,7 +9,7 @@ public class Deck extends ArrayList<Card>{
 	// Creates a Deck and places it into the ArrayList
 	public void createDeck() {
 		for(int i = 0; i < 4; i++) {
-			for(int j = 2; j < 14; j++) {
+			for(int j = 2; j < 15; j++) {
 				char letter = ' ';
 				switch (i) {
 				case 0: letter = 'C'; break;
