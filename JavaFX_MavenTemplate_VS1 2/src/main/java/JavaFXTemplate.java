@@ -44,7 +44,7 @@ public class JavaFXTemplate extends Application {
 
 		root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
 		game_screen = new Scene(root, 800,800);
-		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test2.css")).toExternalForm()));
+		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
 
 		root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/settings_screen.fxml")));
 		setting_screen = new Scene(root, 800,800);
@@ -53,6 +53,8 @@ public class JavaFXTemplate extends Application {
 		JavaFXTemplate.primaryStage = primaryStage;
 		primaryStage.setTitle("Three Card Poker");
 		primaryStage.setScene(main_menu_screen);
+		primaryStage.setMaximized(true);
+		//primaryStage.setFullScreen(true);
 		primaryStage.show();
 	}
 	// Reference for primaryStage for other classes
@@ -72,13 +74,15 @@ public class JavaFXTemplate extends Application {
 				primaryStage.setScene(setting_screen);
 				break;
 		}
+		primaryStage.setMaximized(false);
+		primaryStage.setMaximized(true);
 
 	}
 
 	public static void resetGameScreen() throws IOException {
 		Parent root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
 		game_screen = new Scene(root, 800,800);
-		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test2.css")).toExternalForm()));
+		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
 	}
 
 }
