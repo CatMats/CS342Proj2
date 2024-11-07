@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 public class ThreeCardLogic {
 	
-	// Evaluates the hand of a player object and determines the score for it
+	// Evaluates the hand of a player object and determines the score for it.
 	public static int evalHand(ArrayList<Card> hand) {
 		ArrayList<Card> tempHand = hand;
 		Collections.sort(tempHand, Comparator.comparingInt(Card::getValue));
