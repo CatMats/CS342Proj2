@@ -5,21 +5,24 @@ public class ThreeCardLogic {
 	
 	// Evaluates the hand of a player object and determines the score for it
 	public static int evalHand(ArrayList<Card> hand) {
-		ArrayList<Card> tempHand = sortHand(hand);
+		ArrayList<Card> tempHand = hand;
+		Collections.sort(tempHand, Comparator.comparingInt(Card::getValue));
+
 			
 		// Straight Flush
-		if ((tempHand.get(0).value++ == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(1).value--) && (hand.get(0).suit == hand.get(1).suit || hand.get(1).suit == hand.get(2).suit || hand.get(0).suit == hand.get(2).suit)) {
+		if ((tempHand.get(0).value + 1 == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(2).value - 1) && (hand.get(0).suit == hand.get(1).suit && hand.get(1).suit == hand.get(2).suit )) {
 			return 1;
 		}
 		// 3 of a kind
-		if (tempHand.get(0).suit == tempHand.get(1).suit && tempHand.get(1).suit == tempHand.get(1).suit) {
+		if (tempHand.get(0).value == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(2).value) {
 			return 2;
 		}
-		if (tempHand.get(0).value++ == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(1).value--) {
+		// Straight
+		if (tempHand.get(0).value + 1 == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(2 ).value - 1) {
 			return 3;
 		}
 		// Flush
-		if (hand.get(0).suit == hand.get(1).suit || hand.get(1).suit == hand.get(2).suit || hand.get(0).suit == hand.get(2).suit) {
+		if (hand.get(0).suit == hand.get(1).suit && hand.get(1).suit == hand.get(2).suit) {
 			return 4;
 		}
 		// Pair
@@ -54,7 +57,7 @@ public class ThreeCardLogic {
 		// shouldn't get here...
 		return 0;
 	}
-	
+
 	// Sorts the hand from smallest to biggest
 	public static ArrayList<Card> sortHand(ArrayList<Card> hand) {
 		ArrayList<Card> sortedHand = new ArrayList<Card>(3);
@@ -67,7 +70,7 @@ public class ThreeCardLogic {
 				}
 			}
 			sortedHand.add(min);
-		
+
 		}
 		return sortedHand;
 	}
