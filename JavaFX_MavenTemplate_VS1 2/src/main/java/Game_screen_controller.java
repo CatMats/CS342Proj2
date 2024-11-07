@@ -391,7 +391,10 @@ public class Game_screen_controller implements Initializable {
             delay.setOnFinished(event -> {player2Hand.getChildren().add(finalI, card);});
             delay.play();
         }
-        setUpPlayBet();
+        PauseTransition pause = new PauseTransition(Duration.millis(4000));
+        pause.setOnFinished(event -> {setUpPlayBet();});
+        pause.play();
+
     }
 
     // Setups the game screen for a play bet and hides all old ui elements
@@ -528,7 +531,10 @@ public class Game_screen_controller implements Initializable {
             delay.setOnFinished(event -> {dealerHand.getChildren().add(finalI, card);});
             delay.play();
         }
-        calculateResults();
+        PauseTransition delay = new PauseTransition(Duration.millis(4000));
+        delay.setOnFinished(event -> {calculateResults();});
+        delay.play();
+
     }
 
     // Checks to see which bets were won and which ones are lost
@@ -544,6 +550,7 @@ public class Game_screen_controller implements Initializable {
                 }
                 case 0: {
                     status += "Player 1 has lost the Ante Bet!\n";
+                    player1.totalWinnings += -1 * (player1.anteBet + player1.playBet);
                     break;
                 }
             }
@@ -557,6 +564,7 @@ public class Game_screen_controller implements Initializable {
                     status += "Player 1 would have won the Pair Plus Bet if they stayed...\n";
                 } else {
                     status += "Player 1 has lost the Pair Plus Bet!\n";
+                    player1.totalWinnings += -1 * (player1.pairPlusBet);
                 }
             }
         }
@@ -569,6 +577,7 @@ public class Game_screen_controller implements Initializable {
                 }
                 case 0: {
                     status += "Player 2 has lost the Ante Bet!\n";
+                    player2.totalWinnings += -1 * (player2.anteBet + player2.playBet);
                     break;
                 }
             }
@@ -582,6 +591,7 @@ public class Game_screen_controller implements Initializable {
                     status += "Player 2 would have won the Pair Plus Bet if they stayed...\n";
                 } else {
                     status += "Player 2 has lost the Pair Plus Bet!\n";
+                    player2.totalWinnings += -1 * (player2.pairPlusBet);
                 }
             }
 
@@ -607,19 +617,21 @@ public class Game_screen_controller implements Initializable {
         swapGamePhases(true);
 
         player1AnteTextField.setDisable(false);
+        player1PairPlus.setDisable(false);
         try {
-            player1PairPlus.setDisable(false);
-        } catch (Exception e) {
             player1PairPlusTextField.setDisable(false);
+        } catch (Exception e) {
+            ;
         }
         player1Confirm.setDisable(false);
         player1PlayButton.setDisable(false);
         player1HoldButton.setDisable(false);
         player2AnteTextField.setDisable(false);
+        player2PairPlus.setDisable(false);
         try {
-            player2PairPlus.setDisable(false);
-        } catch (Exception e) {
             player2PairPlusTextField.setDisable(false);
+        } catch (Exception e) {
+            ;
         }
         player2Confirm.setDisable(false);
         player2PlayButton.setDisable(false);
@@ -630,6 +642,7 @@ public class Game_screen_controller implements Initializable {
         player2Hand.getChildren().clear();
         dealerHand.getChildren().clear();
 
+        gameStatus.setText("");
 
     }
 
