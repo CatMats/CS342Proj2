@@ -559,7 +559,7 @@ public class Game_screen_controller implements Initializable {
                     break;
                 }
                 case 0: {
-                    status += "Player 1 has lost the Ante Bet!\n";
+                    status += "Player 2 has lost the Ante Bet!\n";
                     break;
                 }
             }
