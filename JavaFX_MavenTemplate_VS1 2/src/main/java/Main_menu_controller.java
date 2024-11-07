@@ -30,7 +30,7 @@ public class Main_menu_controller {
     }
     @FXML
     public void quitGame(ActionEvent event) throws IOException{
-        Alert alert = new Alert(Alert.AlertType.NONE, null, ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, null, ButtonType.YES, ButtonType.NO);
         alert.setTitle("Do You want to quit?");
         alert.setHeaderText("Are you sure you want to quit?");
         Optional<ButtonType> result = alert.showAndWait();
