@@ -76,8 +76,8 @@
     <Line fx:id = "horizontalLine" layoutX = "0" layoutY = "330.0" endX = "2000" />
     <Line fx:id = "middleVerticalLine" layoutX = "760" layoutY = "330" endY ="900"/>
 
-    <Label fx:id = "player1WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.leftAnchor  = "600" AnchorPane.topAnchor = "750" textAlignment = "RIGHT"/>
-    <Label fx:id = "player2WinningsLabel" text = "Total Winnings: xxxx" AnchorPane.rightAnchor = "640" AnchorPane.topAnchor = "750" textAlignment = "LEFT"/>
+    <Label fx:id = "player1WinningsLabel" text = "Total Winnings: 0" AnchorPane.leftAnchor  = "600" AnchorPane.topAnchor = "750" textAlignment = "RIGHT"/>
+    <Label fx:id = "player2WinningsLabel" text = "Total Winnings: 0" AnchorPane.rightAnchor = "640" AnchorPane.topAnchor = "750" textAlignment = "LEFT"/>
     <Label fx:id = "gameStatus" text ="" AnchorPane.leftAnchor = "680" AnchorPane.topAnchor = "200" textAlignment = "CENTER" alignment = "CENTER"/>
     <VBox fx:id = "player1PlayVbox" AnchorPane.leftAnchor = "290" AnchorPane.bottomAnchor = "235" visible = "false" spacing = "10">
         <Label fx:id = "player1Label2" prefWidth = "160" text = "Player 1" alignment = "CENTER"/>
