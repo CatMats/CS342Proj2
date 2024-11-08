@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class Game_screen_controller implements Initializable {
 
-
+    //fxml ui stuffs
     @FXML
     public Label dealerLabel;
     @FXML
