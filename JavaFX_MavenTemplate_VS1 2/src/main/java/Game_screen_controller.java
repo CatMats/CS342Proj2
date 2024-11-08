@@ -434,7 +434,7 @@ public class Game_screen_controller implements Initializable {
         player2PlayButton.setDisable(true);
         player2HoldButton.setDisable(true);
         player2.playBet = player2.anteBet;
-        if (player2PlayButton.isDisable()) {setDealershand();}
+        if (player1PlayButton.isDisable()) {setDealershand();}
     }
     public void setPlayer2HoldButton() {
         player2PlayStatus = false;
@@ -636,6 +636,8 @@ public class Game_screen_controller implements Initializable {
         player2Confirm.setDisable(false);
         player2PlayButton.setDisable(false);
         player2HoldButton.setDisable(false);
+
+        gameStatus.setText("");
 
 
         player1Hand.getChildren().clear();
