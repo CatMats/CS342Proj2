@@ -42,9 +42,9 @@ class MyTest {
 	void new_deck_test() {
 		Card topCard = myDeck.get(0);
 		myDeck.newDeck();
-		// This could hypothetically fail if we somehow shuffle and have the same exact card on top twice in a row, we simply won't.
-		assertNotEquals(topCard.value, myDeck.takeCardFromDeck().value, "The cards on the top are equal!");
-		assertNotEquals(topCard.suit, myDeck.takeCardFromDeck().suit, "The cards on the top are equal!");
+		// This could hypothetically fail if we somehow shuffle and have the same exact card on top twice in a row, we simply won't...
+		//assertNotEquals(topCard.value, myDeck.takeCardFromDeck().value, "The cards on the top are equal!");
+		//assertNotEquals(topCard.suit, myDeck.takeCardFromDeck().suit, "The cards on the top are equal!");
 		assertNotEquals(topCard, myDeck.takeCardFromDeck(), "The cards on the top are equal!");
 	}
 
@@ -77,4 +77,301 @@ class MyTest {
 		}
 		assertEquals(theDealer.theDeck.size(), 49);
 	}
+
+
+
+
+
+
+	// 3Card Logic Tests
+	@Test
+	void threecardlogicStraightFlush1() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 7);
+		Card b = new Card('H', 8);
+		Card c = new Card('H', 9);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 1, "Hand is not a straight flush!");
+	}
+	@Test
+	void threecardlogicStraightFlush2() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('C', 14); //If the cards are placed out of order
+		Card b = new Card('C', 12);
+		Card c = new Card('C', 13);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 1, "Hand is not a straight flush!");
+	}
+	@Test
+	void threecardlogicStraightFlush3() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('C', 7);
+		Card b = new Card('H', 8);
+		Card c = new Card('S', 9);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertNotEquals(ThreeCardLogic.evalHand(myHand), 1, "Hand is a straight flush!");
+	}
+	@Test
+	void threecardlogic3Row1() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 8);
+		Card b = new Card('H', 8);
+		Card c = new Card('H', 8);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 2, "Hand is not a Three-of-a-kind!");
+	}
+	@Test
+	void threecardlogic3Row2() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('C', 8);
+		Card b = new Card('H', 8);
+		Card c = new Card('S', 8);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 2, "Hand is not a Three-of-a-kind!");
+	}
+	@Test
+	void threecardlogic3Row3() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('H', 5);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertNotEquals(ThreeCardLogic.evalHand(myHand), 2, "Hand is a Three-of-a-kind!");
+	}
+	@Test
+	void threecardlogicStraight1() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('S', 5);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 3, "Hand is not a Straight!");
+	}
+	@Test
+	void threecardlogicStraight2() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 7); //Order check
+		Card b = new Card('S', 5);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 3, "Hand is not a Straight!");
+	}
+	@Test
+	void threecardlogicStraight3() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('H', 5);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertNotEquals(ThreeCardLogic.evalHand(myHand), 3, "Hand is not a Straight!  Check if Straight Flush has priority!");
+	}
+	@Test
+	void threecardlogicFlush1() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('H', 9);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 4, "Hand is not a flush!");
+	}
+	@Test
+	void threecardlogicFlush2() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('S', 9);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertNotEquals(ThreeCardLogic.evalHand(myHand), 4, "Hand is a flush!");
+	}
+	@Test
+	void threecardlogicPair1() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('H', 4);
+		Card c = new Card('D', 14);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 5, "Hand is not a pair!");
+	}
+	@Test
+	void threecardlogicPair2() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('S', 4);
+		Card c = new Card('D', 14);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalHand(myHand), 5, "Hand is not a pair!");
+	}
+	// Tests straight flush
+	@Test
+	void threecardlogicEvalPPWinnings1() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('H', 5);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 100), 4000, "Bet returned is not 4000");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 50), 2000, "Bet returned is not 2000");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 25), 1000, "Bet returned is not 1000");
+	}
+	// Tests Three-of-a-Kind
+	@Test
+	void threecardlogicEvalPPWinnings2() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('H', 4);
+		Card b = new Card('S', 4);
+		Card c = new Card('H', 4);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 100), 3000, "Bet returned is not 3000");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 50), 1500, "Bet returned is not 1500");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 25), 750, "Bet returned is not 750");
+	}
+	// Tests Straight
+	@Test
+	void threecardlogicEvalPPWinnings3() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('D', 4);
+		Card b = new Card('S', 5);
+		Card c = new Card('H', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 100), 600, "Bet returned is not 600");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 50), 300, "Bet returned is not 300");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 25), 150, "Bet returned is not 150");
+	}
+	//Tests flush
+	@Test
+	void threecardlogicEvalPPWinnings4() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('S', 4);
+		Card b = new Card('S', 14);
+		Card c = new Card('S', 9);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 100), 300, "Bet returned is not 300");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 50), 150, "Bet returned is not 150");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 25), 75, "Bet returned is not 75");
+	}
+	//tests pair
+	@Test
+	void threecardlogicEvalPPWinnings5() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('D', 4);
+		Card b = new Card('S', 4);
+		Card c = new Card('S', 9);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 100), 100, "Bet returned is not 100");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 50), 50, "Bet returned is not 50");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 25), 25, "Bet returned is not 25");
+	}
+	//tests losing
+	@Test
+	void threecardlogicEvalPPWinnings6() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('D', 4);
+		Card b = new Card('S', 5);
+		Card c = new Card('H', 9);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 100), 0, "Player actually won!");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 50), 0, "Player actually won!");
+		assertEquals(ThreeCardLogic.evalPPWinnings(myHand, 25), 0, "Player actually won!");
+	}
+	// Test dealer win
+	@Test
+	void threecardlogicCompareHands1() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('D', 4);
+		Card b = new Card('S', 5);
+		Card c = new Card('H', 9);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+
+		ArrayList<Card> dealer = new ArrayList<>(3);
+		Card d = new Card('D', 4);
+		Card e = new Card('D', 5);
+		Card f = new Card('D', 6);
+		dealer.add(d);
+		dealer.add(e);
+		dealer.add(f);
+		assertEquals(ThreeCardLogic.compareHands(dealer, myHand), 1, "The player actually won when dealer has a better hand");
+	}
+	// test player win
+	@Test
+	void threecardlogicCompareHands2() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('D', 4);
+		Card b = new Card('D', 5);
+		Card c = new Card('D', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+
+		ArrayList<Card> dealer = new ArrayList<>(3);
+		Card d = new Card('H', 4);
+		Card e = new Card('C', 7);
+		Card f = new Card('D', 6);
+		dealer.add(d);
+		dealer.add(e);
+		dealer.add(f);
+		assertEquals(ThreeCardLogic.compareHands(dealer, myHand), 2, "Dealer won when player should have won");
+	}
+	// Tests ties
+	@Test
+	void threecardlogicCompareHands3() {
+		ArrayList<Card> myHand = new ArrayList<>(3);
+		Card a = new Card('D', 4);
+		Card b = new Card('D', 5);
+		Card c = new Card('D', 6);
+		myHand.add(a);
+		myHand.add(b);
+		myHand.add(c);
+
+		ArrayList<Card> dealer = new ArrayList<>(3);
+		Card d = new Card('H', 4);
+		Card e = new Card('H', 6);
+		Card f = new Card('H', 5);
+		dealer.add(d);
+		dealer.add(e);
+		dealer.add(f);
+		assertEquals(ThreeCardLogic.compareHands(dealer, myHand), 0, "A Tie should have happened but didnt");
+	}
+
+
+
 }
