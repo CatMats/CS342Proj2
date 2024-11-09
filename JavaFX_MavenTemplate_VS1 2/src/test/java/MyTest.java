@@ -13,16 +13,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 
 class MyTest {
-		Deck myDeck;
-		Dealer theDealer;
-		ArrayList<Card> myHand;
+	Deck myDeck;
+	Dealer theDealer;
+	ArrayList<Card> myHand;
 	@BeforeEach
 	void setup() {
 		myDeck = new Deck();
 		theDealer = new Dealer();
 		myHand = new ArrayList<>();
 	}
-	
+
 	//new test
 	@Test
 	void deck_exists(){
@@ -37,7 +37,7 @@ class MyTest {
 		assertEquals(myDeck.get(0).getValue(), myDeck.takeCardFromDeck().getValue(), "Values of the head and removed card aren't equal");
 		assertEquals(myDeck.get(0).getValue(), myDeck.takeCardFromDeck().getValue(), "Values of the head and removed card aren't equal");
 	}
-	
+
 	@Test
 	void new_deck_test() {
 		Card topCard = myDeck.get(0);
@@ -392,9 +392,9 @@ class MyTest {
 		assertEquals(ThreeCardLogic.compareHands(dealer, myHand), 0, "A Tie should have happened but didnt");
 	}
 
-	//MC test cases 
+	//MC test cases
 	@Test
-	void dealer_deals_deckRefresh(){
+	void dealer_deals_deck_Refresh(){
 		theDealer.dealersHand = theDealer.dealHand();
 		Player thePlayer = new Player();
 		for(int i = 0; i < 5; i++){
@@ -596,10 +596,4 @@ class MyTest {
 		theDealer.dealersHand.add(new Card( 'D', 4));
 		assertEquals(2, ThreeCardLogic.compareHands(theDealer.dealersHand, myHand));
 	}
-
-}
-
-
-
-
 }
