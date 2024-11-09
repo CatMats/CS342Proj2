@@ -33,6 +33,36 @@ public class ThreeCardLogic {
 		return 0;
 		
 	}
+
+	private static int evalWinner(ArrayList<Card> hand) {
+		ArrayList<Card> tempHand = hand;
+		Collections.sort(tempHand, Comparator.comparingInt(Card::getValue));
+
+
+		// Straight Flush
+		if ((tempHand.get(0).value + 1 == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(2).value - 1) && (hand.get(0).suit == hand.get(1).suit && hand.get(1).suit == hand.get(2).suit )) {
+			return 1;
+		}
+		// 3 of a kind
+		if (tempHand.get(0).value == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(2).value) {
+			return 2;
+		}
+		// Straight
+		if (tempHand.get(0).value + 1 == tempHand.get(1).value && tempHand.get(1).value == tempHand.get(2 ).value - 1) {
+			return 3;
+		}
+		// Flush
+		if (hand.get(0).suit == hand.get(1).suit && hand.get(1).suit == hand.get(2).suit) {
+			return 4;
+		}
+		// Pair
+		if (hand.get(0).value == hand.get(1).value || hand.get(1).value == hand.get(2).value || hand.get(0).value == hand.get(2).value) {
+			return 5;
+		}
+
+		return 6;
+
+	}
 	
 	// Evaluates the bet won for PairPlus Bet
 	public static int evalPPWinnings(ArrayList<Card> hand, int bet) {
@@ -49,29 +79,10 @@ public class ThreeCardLogic {
 	}
 	// Compares the Dealer's hand to the player's hand
 	public static int compareHands(ArrayList<Card> dealer, ArrayList<Card> player) {
-		int dInt = evalHand(dealer);
-		int pInt = evalHand(player);
+		int dInt = evalWinner(dealer);
+		int pInt = evalWinner(player);
 		if (dInt == pInt) {return 0;}
-		if (dInt > pInt) {return 1;}
-		if (dInt < pInt) {return 2;}
-		// shouldn't get here...
-		return 0;
-	}
-
-	// Sorts the hand from smallest to biggest
-	public static ArrayList<Card> sortHand(ArrayList<Card> hand) {
-		ArrayList<Card> sortedHand = new ArrayList<Card>(3);
-		Card min = hand.get(0);
-
-		for (int j = 0; j < hand.size(); j++) {
-			for (int i = 0; i < hand.size(); i++) {
-				if (min.value > hand.get(i).value) {
-					min = hand.get(i);
-				}
-			}
-			sortedHand.add(min);
-
-		}
-		return sortedHand;
+		if (dInt < pInt) {return 1;}
+		return 2;
 	}
 }

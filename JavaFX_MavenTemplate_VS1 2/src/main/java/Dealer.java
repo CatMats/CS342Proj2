@@ -9,9 +9,9 @@ public class Dealer {
 
 
 	public ArrayList<Card> dealHand() {
-		if(theDeck.size() <= 34) {theDeck.newDeck();}
 		ArrayList<Card> dealtCards = new ArrayList<>();
 		for(int i = 0; i < 3; i++) {dealtCards.add(theDeck.takeCardFromDeck());}
+		if(theDeck.size() <= 34) {theDeck.newDeck();}
 		return dealtCards;
 	}
 }
