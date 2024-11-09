@@ -68,6 +68,26 @@ class MyTest {
 	}
 
 	@Test
+	void dealer_deck_resets() {
+		theDealer.dealersHand = theDealer.dealHand(); // 49
+		theDealer.dealersHand = theDealer.dealHand(); // 46
+		theDealer.dealersHand = theDealer.dealHand(); // 43
+		theDealer.dealersHand = theDealer.dealHand(); // 40
+		theDealer.dealersHand = theDealer.dealHand(); // 37
+		assertEquals(theDealer.theDeck.size(), 37);
+		theDealer.dealersHand = theDealer.dealHand(); // 34
+		theDealer.dealersHand = theDealer.dealHand(); // Resets to 52 then -3
+		assertEquals(theDealer.theDeck.size(), 49);
+	}
+	@Test
+	void dealer_new_deck_check() {
+		Card a = theDealer.theDeck.takeCardFromDeck();
+		theDealer.theDeck.newDeck();
+		Card b = theDealer.theDeck.takeCardFromDeck();
+		assertNotEquals(a,b, "The Cards are equal");
+	}
+
+	@Test
 	void dealer_deals_deckRefresh(){
 		theDealer.dealersHand = theDealer.dealHand();
 		Player thePlayer = new Player();
