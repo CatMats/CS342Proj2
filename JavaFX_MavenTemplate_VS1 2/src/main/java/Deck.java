@@ -35,6 +35,7 @@ public class Deck extends ArrayList<Card>{
 		return remove(0);
 	}
 	// prints out the contents of a deck
+	// Mostly for testing
 	public void printOutDeck() {
 		for (Card c: this) {
 			System.out.println(c.getSuit() + ":" + c.getValue());
