@@ -392,6 +392,214 @@ class MyTest {
 		assertEquals(ThreeCardLogic.compareHands(dealer, myHand), 0, "A Tie should have happened but didnt");
 	}
 
+	//MC test cases 
+	@Test
+	void dealer_deals_deckRefresh(){
+		theDealer.dealersHand = theDealer.dealHand();
+		Player thePlayer = new Player();
+		for(int i = 0; i < 5; i++){
+			thePlayer.hand = theDealer.dealHand();
+			thePlayer.hand.clear();
+		}
+		assertEquals(52, theDealer.theDeck.size());
+	}
+
+	@Test
+	void straight_flush_test(){
+		myHand.add(new Card('H',11));
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'H', 12));
+		assertEquals(1, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void not_straight_flush_test(){
+		myHand.add(new Card('H', 13));
+		myHand.add(new Card('H', 1));
+		myHand.add(new Card('H', 12));
+		assertNotEquals(1, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void threeofkind_test(){
+		myHand.add(new Card('H',11));
+		myHand.add(new Card( 'C', 11));
+		myHand.add(new Card( 'S', 11));
+		assertEquals(2, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void not_threeofkind_test(){
+		myHand.add(new Card( 'H', 11));
+		myHand.add(new Card( 'C', 10));
+		myHand.add(new Card( 'S', 11));
+		assertNotEquals(2, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void straight_test(){
+		myHand.add(new Card( 'H', 1));
+		myHand.add(new Card( 'C', 3));
+		myHand.add(new Card( 'S', 2));
+		assertEquals(3, ThreeCardLogic.evalHand(myHand));
+
+	}
+
+	@Test
+	void not_straight_test(){
+		myHand.add(new Card( 'S', 1));
+		myHand.add(new Card( 'S', 3));
+		myHand.add(new Card( 'S', 2));
+		assertNotEquals(3, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void flush_test(){
+		myHand.add(new Card( 'H', 1));
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'H', 5));
+		assertEquals(4, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void not_flush_test(){
+		myHand.add(new Card( 'H', 3));
+		myHand.add(new Card( 'H', 2));
+		myHand.add(new Card( 'H', 4));
+		assertNotEquals(4, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void pair_test(){
+		myHand.add(new Card( 'S', 13));
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'H', 5));
+		assertEquals(5, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void not_pair_test(){
+		myHand.add(new Card( 'S', 3));
+		myHand.add(new Card( 'H', 2));
+		myHand.add(new Card( 'C', 4));
+		assertNotEquals(5, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void high_card_test(){
+		myHand.add(new Card( 'H', 3));
+		myHand.add(new Card( 'S', 13));
+		myHand.add(new Card( 'D', 4));
+		assertEquals(0, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void not_high_card_test(){
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'S', 13));
+		myHand.add(new Card( 'D', 4));
+		assertNotEquals(0, ThreeCardLogic.evalHand(myHand));
+	}
+
+	@Test
+	void straight_flush_eval_ppl_test(){
+		myHand.add(new Card('H',11));
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'H', 12));
+		assertEquals(400, ThreeCardLogic.evalPPWinnings(myHand, 10));
+
+
+	}
+
+	@Test
+	void threeofkind_eval_ppl_test(){
+		myHand.add(new Card('H',11));
+		myHand.add(new Card( 'C', 11));
+		myHand.add(new Card( 'S', 11));
+		assertEquals(300, ThreeCardLogic.evalPPWinnings(myHand, 10));
+	}
+
+	@Test
+	void straight_eval_ppl_test(){
+		myHand.add(new Card( 'H', 1));
+		myHand.add(new Card( 'C', 3));
+		myHand.add(new Card( 'S', 2));
+		assertEquals(60, ThreeCardLogic.evalPPWinnings(myHand, 10));
+	}
+
+	@Test
+	void flush_eval_ppl_test(){
+		myHand.add(new Card( 'H', 1));
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'H', 5));
+		assertEquals(30, ThreeCardLogic.evalPPWinnings(myHand, 10));
+	}
+
+	@Test
+	void pair_eval_ppl_test(){
+		myHand.add(new Card( 'S', 13));
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'H', 5));
+		assertEquals(10, ThreeCardLogic.evalPPWinnings(myHand, 10));
+	}
+
+	@Test
+	void high_card_eval_ppl_test(){
+		myHand.add(new Card( 'H', 3));
+		myHand.add(new Card( 'S', 13));
+		myHand.add(new Card( 'D', 4));
+		assertEquals(0, ThreeCardLogic.evalPPWinnings(myHand, 10));
+	}
+
+	@Test
+	void compareHands_draw(){
+		theDealer.dealersHand = new ArrayList<>();
+		theDealer.dealersHand.add(new Card('H', 11));
+		theDealer.dealersHand.add(new Card( 'H', 13));
+		theDealer.dealersHand.add(new Card( 'H', 12));
+		myHand.add(new Card('C',11));
+		myHand.add(new Card( 'C', 13));
+		myHand.add(new Card( 'C', 12));
+		assertEquals(0, ThreeCardLogic.compareHands(theDealer.dealersHand, myHand));
+	}
+
+	@Test
+	void compareHands_dealerWin(){
+		theDealer.dealersHand = new ArrayList<>();
+		theDealer.dealersHand.add(new Card('H', 11));
+		theDealer.dealersHand.add(new Card( 'H', 13));
+		theDealer.dealersHand.add(new Card( 'H', 12));
+		myHand.add(new Card('C',11));
+		myHand.add(new Card( 'H', 11));
+		myHand.add(new Card( 'C', 12));
+		assertEquals(1, ThreeCardLogic.compareHands(theDealer.dealersHand, myHand));
+		myHand.clear();
+		myHand.add(new Card( 'H', 3));
+		myHand.add(new Card( 'S', 13));
+		myHand.add(new Card( 'D', 4));
+		assertEquals(1, ThreeCardLogic.compareHands(theDealer.dealersHand, myHand));
+	}
+
+	@Test
+	void compareHands_playerWin(){
+		theDealer.dealersHand = new ArrayList<>();
+		theDealer.dealersHand.add(new Card('C', 11));
+		theDealer.dealersHand.add(new Card( 'H', 11));
+		theDealer.dealersHand.add(new Card( 'C', 12));
+		myHand.add(new Card('H',11));
+		myHand.add(new Card( 'H', 13));
+		myHand.add(new Card( 'H', 12));
+		assertEquals(2, ThreeCardLogic.compareHands(theDealer.dealersHand, myHand));
+		theDealer.dealersHand.clear();
+		theDealer.dealersHand.add(new Card( 'H', 3));
+		theDealer.dealersHand.add(new Card( 'S', 13));
+		theDealer.dealersHand.add(new Card( 'D', 4));
+		assertEquals(2, ThreeCardLogic.compareHands(theDealer.dealersHand, myHand));
+	}
+
+}
+
+
 
 
 }
