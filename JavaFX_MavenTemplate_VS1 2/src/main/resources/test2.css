@@ -1,0 +1,23 @@
+.root {
+
+   -fx-background-color: #14223b;
+   -fx-font-family: "Elephant";
+   -fx-text-fill: white;
+
+   -fx-font-size: 16;
+}
+#titleLabel{
+    -fx-font-size: 40;
+    -fx-text-fill: white;
+}
+
+.label {
+    -fx-font-size: 12;
+    -fx-text-fill: white;
+}
+
+.button{
+   -fx-background-color: #143163;
+   -fx-font-size: 18;
+   -fx-text-fill: white;
+}
