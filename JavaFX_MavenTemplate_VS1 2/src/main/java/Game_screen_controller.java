@@ -197,6 +197,11 @@ public class Game_screen_controller implements Initializable {
             setPlayerWarningText("Ante Bet is too low! \nMinimum bet is $5!",1);
             return;
         }
+        // Checks if Ante bet < maximum
+        if(Integer.parseInt(anteBet) > 25){
+            setPlayerWarningText("Ante Bet is too high! \nMaximum bet is $25!", 1);
+            return;
+        }
 
         player1.anteBet = Integer.parseInt(anteBet);
 
@@ -211,6 +216,11 @@ public class Game_screen_controller implements Initializable {
                 setPlayerWarningText("Pair Plus Bet is too low! \nMinimum bet is $5!",1);
                 return;
             }
+            if(Integer.parseInt(pairBet) > 25 && Integer.parseInt(pairBet) > 0) {
+                setPlayerWarningText("Pair Plus Bet is too high! \nMaximum bet is $25!",1);
+                return;
+            }
+
             player1.pairPlusBet = Integer.parseInt(pairBet);
         }
 
@@ -250,6 +260,12 @@ public class Game_screen_controller implements Initializable {
             setPlayerWarningText("Ante Bet is too low! \nMinimum bet is $5!",2);
             return;
         }
+
+        // Checks if Ante bet < maxmimum
+        if(Integer.parseInt(anteBet) > 25){
+            setPlayerWarningText("Ante Bet is too high! \nMaximum bet is $25!", 2);
+            return;
+        }
         player2.anteBet = Integer.parseInt(anteBet);
         // If PairPlusBet is valid, then we go here and check stuff
         if (!Objects.equals(pairBet, "FAILED")) {
@@ -261,6 +277,10 @@ public class Game_screen_controller implements Initializable {
             }
             if(Integer.parseInt(pairBet) < 5 && Integer.parseInt(pairBet) > 0) {
                 setPlayerWarningText("Pair Plus Bet is too low! \nMinimum bet is $5!",2);
+                return;
+            }
+            if(Integer.parseInt(pairBet) > 25 && Integer.parseInt(pairBet) > 0){
+                setPlayerWarningText("Pair Plus Bet is too high! \nMaximum bet is $25!", 2);
                 return;
             }
             player2.pairPlusBet = Integer.parseInt(pairBet);
@@ -400,7 +420,6 @@ public class Game_screen_controller implements Initializable {
     // Setups the game screen for a play bet and hides all old ui elements
     public void setUpPlayBet() {
         swapGamePhases(false);
-
     }
 
     // Swaps between setting up Play Bet with the Ante/Pair Bet
@@ -541,16 +560,54 @@ public class Game_screen_controller implements Initializable {
     public void calculateResults() {
         // if player1 chose to play
         String status = "";
-        if(player1PlayStatus == true) {
+
+        boolean dealerHigh = false;
+        if(ThreeCardLogic.evalHand(dealer.dealersHand) == 0){
+            for(int i = 0; i < 3; i++){
+                if(dealer.dealersHand.get(i).value >= 12){
+                    dealerHigh = true;
+                    break;
+                }
+            }
+            if(!dealerHigh){
+                status += "Dealer does not have a Queen high\n Bets are returned.";
+                gameStatus.setText(status);
+                continueButton.setDisable(false);
+                updatePlayerWinningsLabel();
+                return;
+            }
+        }
+
+
+        if(player1PlayStatus) {
             switch (ThreeCardLogic.compareHands(dealer.dealersHand, player1.hand)) {
                 case 2: {
                     status += "Player 1 has won the Ante Bet!\n";
                     player1.totalWinnings += player1.anteBet * 2 + player1.pairPlusBet * 2;
                     break;
                 }
-                case 0: {
+                case 1: {
                     status += "Player 1 has lost the Ante Bet!\n";
                     player1.totalWinnings += -1 * (player1.anteBet + player1.playBet);
+                    break;
+                }
+                case 0:{
+                    switch (tiebreaker(dealer.dealersHand, player1.hand)){
+                        case 2: {
+                            status += "Player 1 has similar hand, but won Ante bet!\n";
+                            player1.totalWinnings += player1.anteBet * 2 + player1.pairPlusBet * 2;
+                            break;
+                        }
+                        case 1: {
+                            status += "Player 1 has similar hand, but lost Ante bet!\n";
+                            player1.totalWinnings += -1 * (player1.anteBet + player1.playBet);
+                            break;
+                        }
+                        case 0: {
+                            status += "Player 1 tied with Dealer... Ante bet returned.\n";
+                            break;
+                        }
+                    }
                     break;
                 }
             }
@@ -568,22 +625,41 @@ public class Game_screen_controller implements Initializable {
                 }
             }
         }
-        if(player2PlayStatus == true) {
+        if(player2PlayStatus) {
             switch (ThreeCardLogic.compareHands(dealer.dealersHand, player2.hand)) {
                 case 2: {
                     status += "Player 2 has won the Ante Bet!\n";
                     player2.totalWinnings += player2.anteBet * 2 + player2.pairPlusBet * 2;
                     break;
                 }
-                case 0: {
+                case 1: {
                     status += "Player 2 has lost the Ante Bet!\n";
                     player2.totalWinnings += -1 * (player2.anteBet + player2.playBet);
+                    break;
+                }
+                case 0: {
+                    switch (tiebreaker(dealer.dealersHand, player2.hand)){
+                        case 2: {
+                            status += "Player 2 has similar hand, but won Ante bet!\n";
+                            player2.totalWinnings += player2.anteBet * 2 + player2.pairPlusBet * 2;
+                            break;
+                        }
+                        case 1: {
+                            status += "Player 2 has similar hand, but lost Ante bet!\n";
+                            player2.totalWinnings += -1 * (player2.anteBet + player2.playBet);
+                            break;
+                        }
+                        case 0: {
+                            status += "Player 2 tied with Dealer... Ante bet returned.\n";
+                            break;
+                        }
+                    }
                     break;
                 }
             }
             int pairPlusWinnings = ThreeCardLogic.evalPPWinnings(player2.hand, player2.pairPlusBet);
             // Checks if the player has placed a bet and they didn't hold
-            if (ThreeCardLogic.evalPPWinnings(player1.hand, player1.pairPlusBet) > 0) {
+            if (ThreeCardLogic.evalPPWinnings(player2.hand, player2.pairPlusBet) > 0) {
                 if (ThreeCardLogic.evalPPWinnings(player2.hand, player2.pairPlusBet) > 0 && player2PlayStatus) {
                     status += "Player 2 has won the Pair Plus Bet!\n";
                     player2.totalWinnings += pairPlusWinnings;
@@ -594,11 +670,21 @@ public class Game_screen_controller implements Initializable {
                     player2.totalWinnings += -1 * (player2.pairPlusBet);
                 }
             }
-
         }
         gameStatus.setText(status);
         continueButton.setDisable(false);
         updatePlayerWinningsLabel();
+    }
+
+    public int tiebreaker(ArrayList<Card> dealerHand, ArrayList<Card> playerHand){
+        int dealerTotal = 0, playerTotal = 0;
+        for(int i = 0; i < 3; i++){
+            dealerTotal += dealerHand.get(i).value;
+            playerTotal += playerHand.get(i).value;
+        }
+        if(dealerTotal == playerTotal){ return 0;}
+        if(dealerTotal > playerTotal){ return 1;}
+        return 2;
     }
 
     // Resets the game for the next round!

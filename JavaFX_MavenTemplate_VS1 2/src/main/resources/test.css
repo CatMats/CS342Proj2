@@ -1,6 +1,22 @@
-.test {
+.root {
 
-   -fx-background-color: red;
+   -fx-background-color: #279c2f;
+   -fx-font-family: "Times New Roman";
+   -fx-text-fill: black;
 
-   -fx-font-size: 32;
+   -fx-font-size: 16;
+}
+#titleLabel{
+    -fx-font-size: 40;
+    -fx-text-fill: black;
+}
+
+.label {
+    -fx-font-size: 12;
+    -fx-text-fill: black;
+}
+
+.button{
+   -fx-background-color: #88fc90;
+   -fx-font-size: 18;
 }

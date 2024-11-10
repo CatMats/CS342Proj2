@@ -8,10 +8,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.shape.Line?>
+
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="Game_screen_controller"
             prefHeight="700.0" prefWidth="700.0">
+
     <Button fx:id = "settingButtons" text = "Settings" onAction = "#settingsButton" prefWidth = "100" prefHeight = "50"/>
     <Label fx:id = "dealerLabel" AnchorPane.leftAnchor = "740" AnchorPane.topAnchor = "20" text = "Dealer" textAlignment = "CENTER" alignment = "CENTER"/>
 
@@ -96,4 +98,5 @@
     </VBox>
 
     <Button fx:id = "continueButton" text = "Continue!" onAction = "#restartGame" prefWidth = "160" prefHeight = "40" AnchorPane.leftAnchor = "680" AnchorPane.topAnchor = "275" disable="true"/>
+
 </AnchorPane>

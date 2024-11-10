@@ -6,6 +6,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Settings_screen_controller {
@@ -22,8 +23,8 @@ public class Settings_screen_controller {
         JavaFXTemplate.setScene(1);
     }
 
-    public void backgroundButtonAction(ActionEvent event) {
-        //TODO: Make a change css styles for the GameScreen Variable
+    public void backgroundButtonAction(ActionEvent event) throws IOException{
+        JavaFXTemplate.changeBG();
     }
 
     public void resetButtonAction(ActionEvent event) throws IOException {

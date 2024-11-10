@@ -30,6 +30,7 @@ public class JavaFXTemplate extends Application {
 	private static Scene main_menu_screen;
 	private static Scene game_screen;
 	private static Scene setting_screen;
+	private static boolean oldStyle = true;
 	public static void main(String[] args) {
 
 		launch(args);
@@ -82,7 +83,27 @@ public class JavaFXTemplate extends Application {
 	public static void resetGameScreen() throws IOException {
 		Parent root = FXMLLoader.load(Objects.requireNonNull(JavaFXTemplate.class.getResource("/game_screen.fxml")));
 		game_screen = new Scene(root, 800,800);
-		game_screen.getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(JavaFXTemplate.class.getResource("/test.css")).toExternalForm()));
+
+		if(oldStyle){
+			game_screen.getStylesheets().add("/test.css");
+			return;
+		}
+		game_screen.getStylesheets().add("/test2.css");
+	}
+
+	public static void changeBG() throws IOException{
+		String newStyle = (oldStyle) ? "/test2.css" : "/test.css";
+		String prevStyle = (oldStyle) ? "/test.css" : "/test2.css";
+
+		main_menu_screen.getStylesheets().remove(prevStyle);
+		game_screen.getStylesheets().remove(prevStyle);
+		setting_screen.getStylesheets().remove(prevStyle);
+
+		main_menu_screen.getStylesheets().add(newStyle);
+		game_screen.getStylesheets().add(newStyle);
+		setting_screen.getStylesheets().add(newStyle);
+
+		oldStyle = !oldStyle;
 	}
 
 }
