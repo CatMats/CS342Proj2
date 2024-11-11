@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public class Settings_screen_controller {
     @FXML
+    Button quitButton;
+    @FXML
     Button backButton;
     @FXML
     Button backgroundButton;
@@ -43,5 +45,14 @@ public class Settings_screen_controller {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.NO) {alert.close();}
         else if (result.get() == ButtonType.YES) {JavaFXTemplate.setScene(0);}
+    }
+
+    public void quitButtonAction(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.NONE, null, ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Are you sure you want to quit the game and close out?");
+        alert.setHeaderText("Are you sure you want to quit the game and close out?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.NO) {alert.close();}
+        else if (result.get() == ButtonType.YES) {JavaFXTemplate.closeGame();}
     }
 }

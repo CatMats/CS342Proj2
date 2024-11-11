@@ -105,5 +105,8 @@ public class JavaFXTemplate extends Application {
 
 		oldStyle = !oldStyle;
 	}
+	public static void closeGame() throws IOException {
+		primaryStage.close();
+	}
 
 }

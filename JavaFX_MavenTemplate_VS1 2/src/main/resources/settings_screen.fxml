@@ -14,10 +14,10 @@
     <VBox alignment="CENTER" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0"
           AnchorPane.topAnchor="150.0" AnchorPane.bottomAnchor="150.0" spacing="20">
         <Button fx:id = "backButton" text = "Back" prefWidth="380" prefHeight = "125" onAction="#backButtonAction"/>
-        <Button fx:id = "backgroundButton" text = "Change Background" prefWidth="380" prefHeight = "125"  onAction="#backgroundButtonAction"/>
+        <Button fx:id = "backgroundButton" text = "New Look" prefWidth="380" prefHeight = "125"  onAction="#backgroundButtonAction"/>
         <Button fx:id = "resetButton" text = "Fresh Start" prefWidth="380" prefHeight = "125" onAction="#resetButtonAction"/>
         <Button fx:id = "titleButton" text = "Exit to Title" prefWidth="380" prefHeight = "125" onAction="#titleButtonAction"/>
-
+        <Button fx:id = "quitButton" text = "Quit Game" prefWidth="380" prefHeight = "125" onAction="#quitButtonAction"/>
     </VBox>
 
 </AnchorPane>
