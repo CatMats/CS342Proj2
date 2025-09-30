@@ -1,3 +1,3 @@
-3-Card Poker!
+# 3-Card Poker!
 
 Works the same as the original game, but in different format!
